@@ -1,0 +1,51 @@
+<!-- 
+
+  Explanation Pt 2.
+
+  Now we are going to change the main axis, it was row, now we'll use columns.
+
+  One important thing to notice is, if we specify the height of the flex container, and it's lower than the sum of all its
+  children's box, it would end up overlapping.
+
+
+-->
+
+<html>
+  <head>
+    <style>
+
+      body {
+        color: white;
+        background-color: black;
+      }
+      
+      .caixa {
+        border: 2px solid white;
+        background-color: #dc143c;
+        padding: 10px;
+        font-size: 30px;
+        width: 200px;
+        
+      }
+
+      .container {
+        height: 500px;
+        border: 5px solid green;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;        
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+    <div class="caixa">Caixa A</div>
+    <div class="caixa">Caixa B</div>
+    <div class="caixa">Caixa C</div>
+
+  </div>
+  </body>
+</html>

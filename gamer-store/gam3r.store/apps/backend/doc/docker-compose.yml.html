@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>docker-compose.yml</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "docker-compose.yml";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>docker-compose.yml</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<p>Services defines the various containers will be run, in this case, only the postgres</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">postgres:</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>Specifies the docker image to be used in this server, in this case, we are using the official image from the Docker Hub</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Custom container name</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">container_name:</span> <span class="hljs-string">'cod3r-gamer.store'</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Configure POSTGRESQL when the container starts</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">POSTGRES_USER:</span> <span class="hljs-string">coder</span>
+      <span class="hljs-attr">POSTGRES_PASSWORD:</span> <span class="hljs-string">coder</span>
+      <span class="hljs-attr">POSTGRES_DB:</span> <span class="hljs-string">gamer-store</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>This tells the first port meaning our computer host and the second port being the container port</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"5432:5432"</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>Volumes are used for data persistence, here we are creating a named volume pgdata and mounting it to /var/lib/postgresql/data
+inside the container, this ensures that the postgres data persists even if the container is stopped or deleted</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">pgdata:/var/lib/postgresql/data</span>
+<span class="hljs-attr">volumes:</span>
+  <span class="hljs-attr">pgdata:</span>
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

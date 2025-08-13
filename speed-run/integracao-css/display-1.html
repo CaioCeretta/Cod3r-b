@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Display #1</title>
+
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			span {
+				/* Span has a display inline which don't consider height and width */
+				background-color: crimson;
+				height: 100px;
+				width: 100px;
+			}
+
+			div {
+				/* Display block on other hand, considers*/
+				margin: 10px 0px;
+				background-color: #8a2be2;
+				height: 80px;
+				width: 80px;
+			}
+
+			.none {
+				/* Hides the element and remove it from the flow */
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Display #1</h1>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Position #2</title>
+
+		<!-- Position Recap Pt. 2
+
+		fixed: 
+			
+		to use it on a fixed position, remove it from the normal flow and positioned relative to the viewport (the browser window)
+		So it won't have an initial positioning, and if we don't specify any top, right..., the browser doesn't know where to place
+		the element and by default, the element stayts at its original positiion, but because it's no longer in the flow, other
+		elements might overlap it, effectively making it invisible.
+		To bring it back we need to add a positioning to it.
+		The differences from fixed to absolute, is that if we scroll down the page, it will keep the position in the viewport,
+		but if it was absolute it wouldn't and the fixed is positioned relative to the viewport, whereas the absolute is to
+		the nearest container.
+
+		One other thing about fixed we have to remember is, because it's based on the viewport, when we have a explicit height set
+		the top value will take precedence, and the element will be placed at top: 200px, without adjusting to the bottom constraint,
+		but if we didn't have a explicit height and both top and bottom are defined, the height will stretch to fill the space
+		between those two values.
+		The same happens to the width, if we didn't have a fixed width, but have a left and right positioning it would stretch
+		to fit the space between the left and right
+
+		sticky: 
+
+		Sticky is similar to fixed, but the main difference is that sticky toggles between relative and fixed positioning based
+		on the user's scroll position.
+
+		So fixed always stay on the viewport, independent of the scroll or containing block, whereas sticky combines aspect of
+		relative an fixed and sticks to a position only within scrollable area of its containing block
+		
+		-->
+
+		<style>
+			.fixo-ajuda {
+				position: fixed;
+				right: 20px;
+				bottom: 20px;
+			}
+
+			.sticky {
+				position: fixed;
+				top: 0px;
+			}
+
+			.caixa {
+				height: 50px;
+				width: 50px;
+				background-color: crimson;
+				border: 5px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Position 2</h1>
+
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<div class="sticky caixa"></div>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<div class="caixa fixo-ajuda"></div>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+		<p>Texto</p>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

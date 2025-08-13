@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Tags Formulário</title>
+	</head>
+	<body>
+		<h1>Tags Formulário</h1>
+
+		<form action="/salvar">
+			<div>
+				<label for="nome">Nome</label>
+				<input
+					name="nome"
+					type="text"
+					placeholder="Informe seu nome"
+				/>
+			</div>
+			<div>
+				<label for="email">E-mail</label>
+				<input
+					name="email"
+					type="email"
+					placeholder="Informe seu email"
+				/>
+			</div>
+			<div>
+				<label for="senha">Senha</label>
+				<input
+					name="senha"
+					type="password"
+					placeholder="Informe seu senha"
+				/>
+			</div>
+			<div>
+				<label for="dependentes"
+					>Número de Dependentes</label
+				>
+				<input
+					name="dependentes"
+					type="number"
+					min="0"
+					max="10"
+					placeholder="Informe a quantidade de dependentes"
+				/>
+			</div>
+			<div>
+				<label for="exterior">Mora no exterior?</label>
+				<input
+					type="checkbox"
+					name="exterior"
+					id="exterior"
+				/>
+			</div>
+			<div>
+				<label for="telefone">Telefone?</label>
+				<input type="tel" name="telefone" id="telefone" />
+			</div>
+			<div>
+				<div>
+					<label for="salario2000">Até 2000</label>
+					<input
+						type="radio"
+						name="salario"
+						id="salario2000"
+						value="2000"
+					/>
+				</div>
+				<div>
+					<label for="salario4000">Até 4000</label>
+					<input
+						type="radio"
+						name="salario"
+						id="salario4000"
+						value="4000"
+					/>
+				</div>
+				<div>
+					<label for="salario4000">Mais 4001</label>
+					<input
+						type="radio"
+						name="salario"
+						id="salario4001"
+						value="4001"
+					/>
+				</div>
+			</div>
+
+			<select name="tipo" id="tipo">
+				<option value="cm">Comum</option>
+				<option value="esp">Especial</option>
+				<option value="vip">VIP</option>
+				<option value="ult">Ultra</option>
+			</select>
+
+			<button>Salvar</button>
+		</form>
+	</body>
+</html>

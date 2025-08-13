@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Flexbox #1</title>
+
+		<!-- Flexbox comments
+		 
+			if we use more internal divs, than the length of the parent container, the elements won't jump to the next line unless
+			we utilize a flex wrap, otherwise, by default, they will shrink evenly, unless we use a flex shrink higher on one
+			particular element and it would cause this specific child to shrink more
+		-->
+		<style>
+			.flexbox {
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.externo {
+				height: 400px;
+				background-color: crimson;
+				border: 5px solid black;
+			}
+
+			.interno {
+				height: 50px;
+				width: 50px;
+				border-radius: 50%;
+				background-color: #00bfff;
+				border: 5px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Flexbox #1</h1>
+
+		<span>Container</span>
+		<div class="externo flexbox">
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+		</div>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

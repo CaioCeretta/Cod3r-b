@@ -1,0 +1,3 @@
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QWe will delete it and only keep the app folder and the assets folder, so it will be as clean as possible\\E$"}
+{"rule":"PREPOSITION_VERB","sentence":"^\\Qinside the create, we create three\\E$"}
+{"rule":"PREPOSITION_VERB","sentence":"^\\Qinside the create, we create three other objects, a flex1, justifyCenter and alignCenter, which are pointing to the properties from css\\E$"}

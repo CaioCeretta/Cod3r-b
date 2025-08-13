@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Seletores CSS #2</title>
+		<style>
+			button {
+				background-color: #0d0dbb;
+				color: white;
+				padding: 5px 10px;
+				border-radius: 5px;
+				border: 0;
+				cursor: pointer;
+			}
+
+			/*
+      Pseudo Classes like hover and focus, are used with a colon and the name of the action over the element
+      Pseudo Elements, like before and after, are used with :: two colons after the selector, what pseudo elements do is
+      basically creating a
+      */
+			button:hover {
+				background-color: #02387f;
+			}
+
+			/*This rule is saying, get the second child div from any parent */
+			span:nth-child(2) {
+				padding: 10px;
+			}
+
+			/* This rule will be applied to any p that is inside a div, but the paragraph does not need to be a direct child
+      from the div, it is a child of the span, which is child of the div */
+			div p {
+				background-color: green;
+			}
+
+			/* If we only want direct childs we need to use >*/
+			div > p {
+				background-color: crimson;
+			}
+
+			/*Or even more chained*/
+			div > span > #text-importante {
+				background-color: blue;
+			}
+
+			/*
+        Order of specifity in our examples
+
+        inline : 1000
+        div > span > #texto-importante:  102
+        id :100
+        class, attr, pseudo: 10
+        div > p:  2
+        element selectors and pseudo-element: 1
+
+        
+      */
+		</style>
+	</head>
+	<body>
+		<h1>Seletores #2</h1>
+
+		<div>
+			<button>Salvar</button>
+		</div>
+
+		<div>
+			<span>Teste</span>
+			<span>
+				<h3>Teste 2 - Roxo</h3>
+				<p id="text-importante">Texto</p>
+			</span>
+		</div>
+
+		<div>
+			<p>Direct child</p>
+		</div>
+
+		<a href="./exercicios.html">Voltar para a lista</a>
+	</body>
+</html>

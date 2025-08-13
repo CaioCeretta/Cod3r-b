@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Flexbox #3</title>
+
+		<!-- Flexbox comments 
+
+
+
+		-->
+
+		<style>
+			.flexbox {
+				display: flex;
+				/* flex-direction: row-reverse; */
+				flex-direction: column-reverse;
+				/* justify-content: center;
+				align-items: center; */
+			}
+
+			.externo {
+				height: 400px;
+				background-color: crimson;
+				border: 5px solid black;
+			}
+
+			.interno {
+				height: 50px;
+				width: 50px;
+				border-radius: 50%;
+				background-color: #00bfff;
+				border: 5px solid #000;
+			}
+
+			.centralizar {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.cor-1 {
+				background-color: #f49;
+			}
+
+			.cor-2 {
+				background-color: #ff7f50;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Flexbox #3</h1>
+
+		<span>Container</span>
+		<div class="externo flexbox">
+			<div class="interno centralizar cor-1">1</div>
+			<div class="interno centralizar cor-2">2</div>
+			<div class="interno centralizar">3</div>
+		</div>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Flexbox #2</title>
+
+		<!-- Flexbox comments 
+
+
+
+		-->
+
+		<style>
+			.flexbox {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.externo {
+				height: 400px;
+				background-color: crimson;
+				border: 5px solid black;
+			}
+
+			.interno {
+				height: 50px;
+				width: 50px;
+				border-radius: 50%;
+				background-color: #00bfff;
+				border: 5px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Flexbox #2</h1>
+
+		<span>Container</span>
+		<div class="externo flexbox">
+			<div class="interno"></div>
+			<div class="interno"></div>
+			<div class="interno"></div>
+		</div>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

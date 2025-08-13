@@ -1,0 +1,112 @@
+<!-- 
+  
+  Display flex explanation:
+
+  When we use the display flex, we apply it to some element, so, for example
+
+  we have a container div, which is flex, and we'll call it a flex container
+  
+  inside of it we have our elements, for example. any 3 divs
+
+  By default, if we don't apply any style to a div, it will have a display block, and each div will occupy its own line,
+  but by the time we say that this div is container, is a flex container, which have many internal divs, it will place
+  the elements side by side at the same row (respecting the container width)
+
+  Justify content will always be on the main axis and it is defined by the flex direction, so colum is vertical and row
+  is horizontal, meanwhile the cross axis is just the opposite
+  
+  1. Justify Content Attributes
+ 
+    flex-start: default, every element will be on the start of the line
+    flex-end: the elements are organized at the end of the line
+    center: the elements are organized in the center
+    space-between: the items align at the edges of the container, and the remaining space is evenly distributed only
+    between the items.
+    space-around: same as the justify between, but there will also be a margin before the first and after the last 
+    space-evenly: the spacing is uniform, not just between items but also between the items and the container's boundaries.
+
+    - Difference between around and evenly: while space around outer spaces are smaller than the inner spaces, in the evenly
+    all spaces are equal
+
+    - End Explanation
+  
+  If we were to, set the flex container height to 400px, we will npw have a spacing on the cross axis,  and we'll now
+  be able to, organize both in the main axis and on the cross axis, and this is done by the align-items.
+
+  If we don't have a fixed height to the parent container, we will see that there will be no difference if i place it as
+  start or end, because the container will have enpugh space to fit the children, if the biggest children is 200px tall
+  the flex container will only be 200px tall
+
+  2. Align Items Attributes
+
+  start: default attribute for the align-items, 
+  end: push the elements to the bottom of the parent container if it has space left  
+  stretch: If we didn't have the height on the children, it would take all the available height, by default the div without
+  any height, would only take the height of the element's box
+  center: Place it on the center, just like start or end
+
+  3. Flex-1
+
+  Flex 1 will allow that this element will increase its size, based on the empty spaces that the container has, if, for example
+  the container is 600px wide, and has 3 children with the width of 100px; in the end that container will have 300px of
+  empty space, and if we utilize the flex-1 in one child, which will determine the flex-grow to be 1, it will end up
+  taking 400px, while the other two keep occupying only 100px
+
+  the flex: 1, basically says that the element will have
+
+  flex-grow: 1 - Defines the capacity of the item to grow more than its base size, which means that if no other element
+  has a flex-grow, it will take the whole space by itself. If every other element also have a flex grow of 1, they will
+  share the remaining empty space, so each element will take up to 200px
+
+  flex-shrink: 1 - Defines the capacity of the item to shrink when the container space is less than the sum of the items
+  width, the value 1 means that the item can shrink proportionally to the insufficient space.
+  If every other element has the same flex-shrink, they will all shrink equally
+
+  flex-basis: 0 - The flex basis define the initial base size of the item, before considering the growth or the shrinking,
+  the value 0 means that the base size is 0, and it will depend mainly of the flex-grow and the flex-shrink to adjust its
+  final size.
+
+  There are other ways of assigning the value to the flex attribute
+
+  flex: 0 1 auto; which is the default, it doesn't grow, shrinks as necessary and the base size is defined by the content
+  width / height
+  flex: 2; which means that the flex-grow is 2, shrink 1 and basis 0, so it will grow twice as fast as the others with
+  grow 1
+
+-->
+
+<html>
+  <head>
+    <style>
+
+      body {
+        color: white;
+        background-color: black;
+      }
+      
+      .caixa {
+        border: 1px solid white;
+        background-color: #dc143c;
+        font-size: 30px;
+        width: 200px;
+      }
+      
+      
+      .container {
+        display: flex;
+        border: 5px solid green;
+        justify-content: start;
+        height: 400px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+    <div class="caixa">Caixa A</div>
+    <div class="caixa">Caixa B</div>
+    <div class="caixa">Caixa C</div>
+  </div>
+  </body>
+</html>

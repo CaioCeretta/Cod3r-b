@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=, initial-scale=1.0"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Cadastro de Receita/Despesa</h1>
+
+		<form action="">
+			<div>
+				<b><label for="descricao">Descrição </label></b>
+				<br />
+				<input
+					type="text"
+					id="descricao"
+					name="descricao"
+				/>
+			</div>
+			<div>
+				<b><label for="observacao">Observação</label></b>
+				<br />
+				<input
+					type="text"
+					id="observacao"
+					name="observacao"
+				/>
+			</div>
+			<div>
+				<br />
+				<b><label for="tipo">Tipo</label></b>
+				Receita<input type="radio" name="tipo" id="tipo" />
+				Despesa<input type="radio" name="tipo" id="tipo" />
+			</div>
+			<div>
+				<b><label for="valor">Valor</label></b>
+				<br />
+				<input type="number" name="valor" id="valor" />
+			</div>
+			<div>
+				<b><label for="consolidado">Consolidado?</label></b
+				><br />
+				<input
+					type="checkbox"
+					name="consolidado"
+					id="consolidado"
+				/>
+			</div>
+			<div>
+				<b><label for="associada">Conta Associada</label></b
+				><br />
+				<select
+					name="select-conta-associada"
+					id="associada"
+				>
+					<option value=""></option>
+					<option value="bb">Conta Corrente BB</option>
+					<option value="nubank">
+						Conta Corrente Nubank
+					</option>
+					<option value="itau-emp">
+						Conta Itaú Empresa
+					</option>
+				</select>
+			</div>
+		</form>
+	</body>
+</html>

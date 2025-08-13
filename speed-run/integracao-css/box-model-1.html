@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Box Model #1</title>
+
+		<style>
+			html {
+				background-color: black;
+				color: white;
+			}
+
+			a {
+				text-decoration: none;
+				color: purple;
+			}
+
+			a:visited {
+				color: purple;
+			}
+
+			div {
+				/* In the box model, when we define the height and the width, it will consider those for the element content, so
+        if we want it to have 100x100, it will only be in the content area, but if we want everything to be 100x100
+        including the padding and the border, we'll say the box-sizing: border-box
+        
+        in this example it will end up with, 50x70 with a padding of 10 on top and bottom, and 20 on the sides and a border
+        of 20, which will end up with  (50+40+10)/(70+20+10)
+        */
+				height: 100px;
+				width: 100px;
+				box-sizing: border-box;
+				background-color: #bbb;
+				word-wrap: break-word;
+				padding: 10px 20px;
+				margin: 20px;
+				border: 5px dashed #555;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Box Model</h1>
+
+		<div>Caixa 1</div>
+
+		<div>Caixa 2</div>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>

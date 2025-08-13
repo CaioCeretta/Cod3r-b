@@ -1,0 +1,81 @@
+GET http://localhost:4000/ping
+
+###
+
+GET http://localhost:4000/eventos
+
+
+###
+
+GET http://localhost:4000/eventos/semana-formacao-dev
+
+###
+
+GET http://localhost:4000/eventos/346e2aa1-ad66-4de7-96db-e3cb353f77e4
+
+###
+ 
+http://localhost:4000/eventos/validar/teste/8f9583cb-ffc1-48b4-8f13-955ca90e6c41
+
+###
+
+POST http://localhost:4000/eventos/acessar
+Content-Type: application/json
+
+{
+  "id": "0da054a5-91ef-4ad6-ae2f-bd30ba0f5f0d",
+  "senha": "senha11234"
+}
+
+###
+
+POST http://localhost:4000/eventos/reuniao-familia-oliveira/convidado
+Content-Type: application/json
+
+{
+  "id": "7a33a412-2597-4e57-97fb-66a4a7c1f55f",
+  "nome": "Caio Ceretta",
+  "email": "caioceretta@gmail.com",
+  "confirmado": true,
+  "possuiAcompanhantes": true,
+  "qtdeAcompanhantes": 2
+}
+
+###
+POST http://localhost:4000/eventos
+Content-Type: application/json
+
+{
+    "alias": "semana-formacao-dev",
+    "nome": "Evento Semana Formação.DEV",
+    "data": "2025-12-31T23:00",
+    "local": "São Paulo",
+    "descricao": "Evento de tecnologia",
+    "senha": "frameworks2025",
+    "imagem": "https://www.formacao.dev/assets/img/formacao-dev.png",
+    "imagemBackground": "https://www.formacao.dev/assets/img/formacao-dev-background.png",
+    "publicoEsperado": 1000,
+    "convidados": [
+        {
+            "nome": "Caio",
+            "email": "caio@caio.caio",
+            "confirmado": true,
+            "possuiAcompanhantes": true,
+            "qtdeAcompanhantes": 10
+        }
+    ]
+}
+
+###
+
+POST http://localhost:4000/eventos/aniversario-joao/convidado
+Content-Type: application/json
+
+{
+  "nome": "Caioooooooooooooooo",
+  "email": "caio@caio.caio",
+  "confirmado": true,
+  "possuiAcompanhantes": true,
+  "qtdeAcompanhantes": 10 
+}
+

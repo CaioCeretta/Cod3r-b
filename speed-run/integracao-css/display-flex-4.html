@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Flexbox #4</title>
+
+		<!-- Flexbox comments 
+
+			# Flex Grow
+
+			Flex grow equal in an example of three items
+
+			only one element has the flex-grow, this will make only this element to take all the available space. because the
+			default is 0 and it will take the minimum size it takes to be rendered
+			two elements have the flex-grow of 1, they both will divide all the left over space, while the third one who has
+			the flex-grow of 0, will take only the needed space
+			three elements have the flex-grow, this will make the three elements to take all the available empty space equally
+
+			Flex grow higher in one or more elements
+
+			If, for example, two elements have the flex grow of 1, but one the other has a flex-grow of 2, they will take all
+			the available space, but the element with the grow bigger than the others. The calculation we do is not simply it will
+			be twice the size of the ones with grow-1, but it will grow more than the others, so it would be, for example
+
+			we have a div, of 400px and 3 items, let's say that three of them have the flex-grow of 1, so they will each one of them
+			have something like 133px, if one of them have the flex-grow-2, while the others have of 1, the calculation would be
+
+			Sum of the weights: 1 + 1 + 2 = 4
+			Each unity has the space equivalent to 400px / 4 = 100px
+
+			So by distributing the space it would be
+
+			each of the items of flex grow 1 would have 100px and the one with flex-grow: 2, will have 200px
+
+			this calculation will work in any cases, like for example 2 elements have flex-grow of 4 and one have the flex-grow
+			of 12. 4 + 4 + 12 = 20, then it will be
+			
+			400 / 20, that is 20px for unity of weight, 
+
+			so the first item with flex 12 will have 12 x 20 that is 240px
+			and the others 80
+
+			# Flex Shrink
+
+			Flex Shrink has basically the same functionality as the growth, but it is the ability of an element to shrink to fit
+			the container width, instead of growing to occupy the available space
+
+
+			
+
+
+		-->
+
+		<style>
+			.flexbox {
+				display: flex;
+			}
+
+			.externo {
+				display: flex;
+				flex-direction: row;
+				height: 400px;
+				background-color: crimson;
+				border: 2px solid black;
+			}
+
+			.interno {
+				height: 50px;
+				background-color: #00bfff;
+				border: 2px solid #000;
+			}
+
+			.grow-1 {
+				flex-grow: 4;
+			}
+
+			.grow-2 {
+				flex-grow: 12;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Flexbox #4</h1>
+
+		<span>Container</span>
+		<div class="externo">
+			<div class="interno grow-1">1</div>
+			<div class="interno grow-2">2</div>
+			<div class="interno grow-1">3</div>
+		</div>
+
+		<a href="./exercicios.html">Voltar à lista</a>
+	</body>
+</html>
