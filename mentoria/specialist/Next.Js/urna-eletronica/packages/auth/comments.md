@@ -36,7 +36,7 @@
       □ In the end, the main index.tsx will be the login page, and check if the user is logged in, if so, he will be moved
       to the inicio/index.tsx
       □ I left the item above as educational purposes, the login page, will be placed on a route group (externa), and
-      inside a auth folder
+      inside a auth
       
 
 ● First use case - userLogin 
