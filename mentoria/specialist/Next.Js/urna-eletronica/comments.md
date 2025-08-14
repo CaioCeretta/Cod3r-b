@@ -98,6 +98,66 @@
 
             . with the dev script running in parallel all dev scripts from the workspaces, we run all together
 
+  ● Layout errors
+
+    ○ I, personally, faced  an error, where i was not sure how to place the layouts correctly, and this is going to be
+    registered for me to not make the same mistake again
+
+    ○ In Next.js App router, only the root layout `app/layout.tsx` is responsible for defining the <html> and <body> tags
+    of the entire application, and here are some mistakes we can make
+
+      ■ 1 - Creating the app/layout.tsx  like
+
+        ```ts
+          export default function RootLayout({
+              children,
+          }: Readonly<{
+              children: React.ReactNode
+          }>) {
+              return (
+                  <html lang="pt-BR">
+                      <div>{children}</div>
+                  </html>
+              )
+          }
+        ```
+
+      □ Here we end up defining an invalidHTML, since div was directly inside html without a <body> tag between\
+
+      □ Browsers will ttry to fix this automatically by inserting a <body> element for us, but this breaks the expected
+      structure of the App.ROuter in particular
+
+        1. Next.js expects the body tag to be in our root layout, so it can properly inject scripts
+        2. Skipping <body> means our layout is technically malformed
+        3. Adding <html> in route-group layouts (like `(admin)/layout.tsx`) makes the problem worse because we'd be trying
+        to render a full HTML document inside another HTML document, which is invalid
+    
+    ■ Correct approach
+
+      □ define <html> and <body> exactly one in the app — In the root layout
+      □ Any nested layouts, like the admin one, do not use <html><body>, just wrap the children in UI structure components,
+      such as Page
+      □ This will avoid hydration errors by Next.js
+
+● Specific Components
+
+  ○ One important thing when creating specific components, is not to limit its uses by taking off everything that one component
+  has, its flexibility. When defining the properties of a button component we've created, for example, it is important to
+  us to, in the interface, consider all existing properties within a button and place them inside our button so it can
+  support all these necessities.
+    This is why the instructor often follows the approach of creeating a specific component, but since in the app we're
+  building, the goal is to simplify most of it, he ended up having the idea of creating a css class to be used inside purely
+  html tags.
+
+● Wrapping the main layout with the Context Provider
+
+  ○ This is not considered the best approach, in the ideal scenario we would transform the layout return to be a client
+  component, for this, we are going to create a folder (paginas) and place all our routs inside of this folder
+
+  ○ We are going to do this, because this way, we can create a single layout file for all the pages within the app, this
+  layout is going to be a client one since it will use a context provider
+
+  ○ 
 
 
 
