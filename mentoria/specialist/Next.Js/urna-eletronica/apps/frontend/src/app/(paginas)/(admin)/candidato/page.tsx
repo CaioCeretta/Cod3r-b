@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import CandidateForm from "@/components/candidate/CandidateForm";
-import CandidatesList from "@/components/candidate/CandidatesList";
+import ForcarUsuarioLogado from "@/components/auth/forcar-usuario-logado";
+import CandidateForm from "@/components/candidato/CandidateForm";
+import CandidatesList from "@/components/candidato/CandidatesList";
 import candidatesJSON from "@/data/constants/candidates";
 import type Candidate from "@/data/models/Candidato";
 
-export const PageCandidate = () => {
+export const PageCandidato = () => {
 	const [candidates, setCandidates] = useState<Candidate[]>(candidatesJSON);
 	const [selectedCandidate, setSelectedCandidate] =
 		useState<Partial<Candidate> | null>(null);
@@ -36,7 +37,7 @@ export const PageCandidate = () => {
 	}
 
 	return (
-		<div>
+		<ForcarUsuarioLogado>
 			{selectedCandidate ? (
 				<CandidateForm
 					candidate={selectedCandidate}
@@ -59,8 +60,8 @@ export const PageCandidate = () => {
 					/>
 				</div>
 			)}
-		</div>
+		</ForcarUsuarioLogado>
 	);
 };
 
-export default PageCandidate;
+export default PageCandidato;
