@@ -1,4 +1,4 @@
-import type Candidate from "@/data/models/Candidate";
+import type Candidate from "@/data/models/Candidato";
 
 export interface CandidatesListProps {
 	candidates: Candidate[];

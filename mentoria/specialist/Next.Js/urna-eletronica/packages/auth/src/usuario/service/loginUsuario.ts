@@ -1,4 +1,4 @@
-import { usuariosFalsos as usuarios } from "../../constants/usuarios";
+import { usuariosFalsos as usuarios } from "../../constantes/usuarios";
 
 export default function loginUsuario(email: string, senha: string) {
 	const usuario = usuarios.find(

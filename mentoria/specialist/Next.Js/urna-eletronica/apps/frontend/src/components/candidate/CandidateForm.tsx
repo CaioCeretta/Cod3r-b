@@ -1,7 +1,7 @@
 "use client";
 
 import { type ChangeEvent, useState } from "react";
-import type Candidate from "@/data/models/Candidate";
+import type Candidate from "@/data/models/Candidato";
 
 export type CandidateFormProps = {
 	candidate: Partial<Candidate>;

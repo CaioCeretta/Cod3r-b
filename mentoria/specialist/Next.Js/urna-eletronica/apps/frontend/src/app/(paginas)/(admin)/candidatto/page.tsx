@@ -4,7 +4,7 @@ import { useState } from "react";
 import CandidateForm from "@/components/candidate/CandidateForm";
 import CandidatesList from "@/components/candidate/CandidatesList";
 import candidatesJSON from "@/data/constants/candidates";
-import type Candidate from "@/data/models/Candidate";
+import type Candidate from "@/data/models/Candidato";
 
 export const PageCandidate = () => {
 	const [candidates, setCandidates] = useState<Candidate[]>(candidatesJSON);
