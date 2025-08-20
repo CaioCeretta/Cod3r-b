@@ -157,7 +157,14 @@
   ○ We are going to do this, because this way, we can create a single layout file for all the pages within the app, this
   layout is going to be a client one since it will use a context provider
 
-  ○ 
+● Should the User model be an interface or a class? 
+
+  ○ The user model, which in the beginning as an interface, usually it is a class. But for simplifying the code at the
+  first moment, we are going to use it as an interface.
+    
+  ○ One question that may arise is: "Ok, now, how i will create this class?". If we just create a class with attributes
+  and get/set methods, at the end of the day, it is basically the same as an interface, but if we want to insert some
+  rich behaviors (methods), it makes more sense to turn it into a class that represent that model.
 
 
 
