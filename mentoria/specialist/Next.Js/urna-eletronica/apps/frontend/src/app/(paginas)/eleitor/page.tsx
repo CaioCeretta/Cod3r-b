@@ -1,7 +1,9 @@
-export default function PageVoter() {
+import ForcarUsuarioLogado from "@/components/auth/forcar-usuario-logado";
+
+export default function PageEleitor() {
 	return (
-		<div className="">
-			<p className="text-5xl">Voter</p>
-		</div>
+		<ForcarUsuarioLogado>
+			<div>Voter</div>
+		</ForcarUsuarioLogado>
 	);
 }
