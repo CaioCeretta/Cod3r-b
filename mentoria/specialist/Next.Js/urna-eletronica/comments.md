@@ -166,5 +166,63 @@
   and get/set methods, at the end of the day, it is basically the same as an interface, but if we want to insert some
   rich behaviors (methods), it makes more sense to turn it into a class that represent that model.
 
+● Context function
+
+  ○ If we define a function to update some state data, and this function is defined to have the same type as the useState
+  is typed, if no further processing is done to the parameter, we can simply use this setter function as the function
+
+  e.g.
+
+    ■ const [usuario, setUsuario] = useState<Partial<Usuario>>({} as any);
+      □ state is typed as a partial user
+
+    ■ 	alterarUsuario: (usuario: Partial<Usuario>);
+      □ Context properties have a function with the same type as the state
+
+    ■ on the values object, passed to the provider we can simply
+    value={{
+				usuario,
+				alterarUsuario: setUsuario,
+			}}
+
+  ○ Basically, when we do const [usuario, setUsuario] = useState<Partial<Usuario>>({} as any). React infers it as
+
+    ■ usuario: Partial<User>; setUser: React.Dispatch<React.SetStateAction<Partial<User>>>;
+    ■ Which means that the setUser is not only a function which receives a Partial<User>, it actually has the signature
+    of: 
+      □ type SetUsuario = (value: Partial<Usuario> | ((prev: Partial<Usuario>) => Partial<Usuario>)) => void;
+      □ This means that we can directly pass a Partial<Usuario> object with, for example, setUser({ name: "Caio"});
+      □ Or a function that receives the older state setUser(prev => {...prev, age: 29})
+
+    ■ Inside the context, we define that the alterarUsuario is a function that receives a Partial<Usuario> and does not
+    return anything
+
+    ■ So, in the end, it makes sense using the setUser as the same function because setUsuario is more generic than the
+    alterarUsuario typing
+      □ setUsuario accepts a Partial<Usuario> or a function
+      □ alterarUsuario accepts only a Partial<Usuario>
+      □ Therefore, when we pass this function in the context value for the alterarUsuario, ts accepts it because any place
+      that expects for a user: Partial<Usuario> can receive the setUser, since passing a partial is a case it accepts. it
+      is just like a subset of a bigger function
+
+    ■ In summary we can use setUsuario because its typing of Dispatch<SetStateAction<T>> is broader than the one which
+    alterarUsuario typed. Since it accepts a Partial<Usuario> directly, ts considers it valid
+
+  ○ Input blocked when using different state for the same input value
+
+    ■ 1. We have two different states for the same input
+      □ Created a local state for password, with a useState
+      □ But in the value of the input, we are not using this password, but the property password of another object
+
+    ■ 2. React locks the input because it is controlled
+      □ A controlled <input> in React should have its value tied to the same state we update in onChange
+
+    ■ To fix it, we just need to bind the value to the same state we're updating
+
+
+
+
+
+
 
 
