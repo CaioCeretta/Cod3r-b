@@ -39,7 +39,61 @@
       inside a auth
       
 
-● First use case - userLogin 
+● Page `Modo`
+
+  ○ In the form page of the login, One thing we could for showing different forms, is creatiing a modo state, for the page
+  to know which form to render it would be like:
+    const [modo, setModo] = useState<'login' | 'register'>('login')
+  
+  Then, we could show different forms based on the choice. This is useful in case we want to render different things
+  inside a page instead of creating a new one for each
+
+● "Loose" ternary function insde a button onclick and a "non-loose" one
+
+  1. When the linter say that the expression is expected to be an assignment of function call
+    He is looking for a "loose" expression insde a {...} block
+    a classical example of a loose function that does not do anything: 
+    ```ts
+      () => {
+        1 + 2
+      }
+    ```
+
+    This calculates 3, but the result isn't used or returned
+
+  2. On the ternary case
+ 
+    ```ts
+      () => {
+        condition ? login() : register()
+      }
+    ```
+
+    Here the linter sees the ternary operator as the main expression.
+    Which means, that for him, what is "loose" are not exactly the functions login() and register(), but yes the expression
+    `condition ? ... : ...` entirely, because it products a value that is not used nor returned
+
+    That's why he complains
+
+      . It expects us to assign this value to something, or
+      . return the result
+
+    However, breaking the form in many lines, even with the same code, will make the linter/formatter to interpret the
+    login(), register() calls as statements inside the body, and not simply a value returned by the ternary
+
+    such as onClick={() => {
+      modo === 'login'
+      ? login(email, senha)
+      : cadastrar({email, senha, nome})
+    }}
+
+    Different from the other one, it would work
+
+
+
+
+
+
 
   
 
