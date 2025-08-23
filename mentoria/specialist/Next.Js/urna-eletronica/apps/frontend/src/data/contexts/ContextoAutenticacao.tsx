@@ -2,11 +2,13 @@
 
 import { loginUsuario, type Usuario } from "@urna/auth";
 import { useRouter } from "next/navigation";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import useAPI from "../hooks/useAPI";
 
 export interface ContextoAutenticacaoProps {
 	usuario: Partial<Usuario> | null;
 	login: (email: string, senha: string) => Promise<void>;
+	cadastrar: (usuario: Partial<Usuario>) => Promise<void>;
 	logout: () => void;
 }
 
@@ -17,6 +19,15 @@ const ContextoAutenticacao = createContext<ContextoAutenticacaoProps>(
 export function ProvedorAutenticacao(props: any) {
 	const [usuario, setUsuario] = useState<Partial<Usuario> | null>(null);
 	const router = useRouter();
+
+	const { httpGet } = useAPI();
+
+	async function cadastrar(usuario: Partial<Usuario>) {
+		const resultado = await httpGet("");
+
+		console.log(resultado);
+		alert(resultado);
+	}
 
 	async function login(email: string, senha: string) {
 		try {
@@ -39,6 +50,7 @@ export function ProvedorAutenticacao(props: any) {
 			value={{
 				usuario,
 				login,
+				cadastrar,
 				logout,
 			}}
 		>

@@ -4,10 +4,7 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:frontend": "cd apps/frontend && npm run dev",
-    "dev:backend": "cd apps/backend && npm run start:dev",
-    "dev:auth": "cd packages/auth && npm run dev",
-    "dev:votacao": "cd packages/votacao && npm run dev",
-    "dev:shared": "cd packages/shared && npm run dev"
+    "dev:backend": "cd apps/backend && npm run start:dev"
   },
   "workspaces": [
     "apps/*",

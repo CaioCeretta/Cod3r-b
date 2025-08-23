@@ -1,6 +1,6 @@
 export default interface Usuario {
 	id: string;
-	name: string;
+	nome: string;
 	email: string;
 	senha?: string;
 }

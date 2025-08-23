@@ -287,19 +287,36 @@
       □ x But if that symbol is needed at runtime (e.g. in dependency injection frameworks like NestJS), 
       **using import type will break our app**
 
-○ 1. When to use each
+  ○ 1. When to use each
 
-  ■ Use import type when: 
+    ■ Use import type when: 
 
-    □ We are sure the symbol is only used in type annotation
-    □ Example:
-    
-  ```ts
-    import type { User } from "./user";
-      function printUser(user: User) {
-        console.log(user.name)
-      }
-  ```
+      □ We are sure the symbol is only used in type annotation
+      □ Example:
+      
+    ```ts
+      import type { User } from "./user";
+        function printUser(user: User) {
+          console.log(user.name)
+        }
+    ```
+
+    ■ Mixed case (with import type helper): 
+
+      ```ts
+        import { type User, createUser } from "./user"
+      ```
+    □ createUser is runtime
+    □ User is erased (type-only)
+
+  ○ 4. Summary
+
+    ■ import -> runtime + type (generates code)
+    ■ import type -> type-only (erased, no runtime code)
+    ■ Choosing the wrong can either bloath the bundle (using import unnecessarily) or break runtime features (using import
+    type when value is required, like NestJS DI)
+
+
 
 
 
