@@ -219,6 +219,101 @@
 
     ■ To fix it, we just need to bind the value to the same state we're updating
 
+    ■ Other thing that would cause the input to be "locked" is by removing the onChange which changes the state of the
+    value, such as
+    <input value={nameState} onChange={(e) => setNameState({})}>
+    we are no longer able to alter this input value, since the first step of changing a value in a form is by altering
+    the state which this attribute is looking to
+
+● env variables
+
+  ○ In next.js, all env variables that start with NEXT_PUBLIC_ are exposed to the front-end, so in our case, even though
+  nest and next have similar names, `NEXT_PUBLIC_API_URL` wasn't a typo, this env variable is the front end way of accessing
+  the nest api routes
+
+● String is not a valid JSON
+
+  ○ We created a method for interacting with the DB via the frontend, we sent a request for a hook in our frontend, it called
+  the backend and return the backend's route return
+    However, when trying to convert the simple string of "Hello World" into a JSON, it would return an error saying that
+  "Hello World" is not a valid JSON
+  
+  ○ To fix this, there are no need to change our hook, but yes the backend controller who should return an object and not
+  just a string, since the response.json() after the fetch only works in value/pair objects
+
+● Import and Import Type
+
+  ○ 1. Import
+
+    ■ When is it used: e.g. import { User } from "./user";
+
+      □ Typescript will generate a real require on compiled JS
+        . Compiled example.
+            
+  ```js
+             "use strict";
+             Object.defineProperty(exports, "_esModule", { value: true });
+             const user_1 = require("./user");
+  ```
+
+      □ This is:
+        ▢ user.ts file will really be loaded on runtime
+      
+    ■ Implication
+      □ Even if we use `User` only as type, the whole module is still included in the bundle/runtime
+      □ Useful when you need the runtime value (e.g., new User(), UserService, decorators like in NestJS)
+
+  ○ 2. Import type
+
+    ■ When it is used: 
+
+      □ For types only, not runtime values.
+      Example:
+
+        ```ts
+          import type { User } from "./user"
+        ```
+
+    ■ What happens after compilation:
+
+      □ Typescript erases the import completely. Meaning nothing remains in compiled JS
+
+        . No require, no import -> the referenced file will not be loaded
+    
+    ■ Implication
+
+      □ Makes it explicit that we're only depending on the **shape of the type** 
+      □ Can reduce bundle size and prevent circular dependency issues.
+      □ x But if that symbol is needed at runtime (e.g. in dependency injection frameworks like NestJS), 
+      **using import type will break our app**
+
+○ 1. When to use each
+
+  ■ Use import type when: 
+
+    □ We are sure the symbol is only used in type annotation
+    □ Example:
+    
+  ```ts
+    import type { User } from "./user";
+      function printUser(user: User) {
+        console.log(user.name)
+      }
+  ```
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
