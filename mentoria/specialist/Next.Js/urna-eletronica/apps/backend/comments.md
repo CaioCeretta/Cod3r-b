@@ -15,6 +15,14 @@
     ○ For the project, we will use prisma since its developing experience is good, even though its a newer ORM than other
     market options, it can attend what we need
 
+      ■ npx prisma migrate dev reminder: When running this command, initially, it will create a .env file with a DATABASE_URL
+      key simply saying a db file will be created as a file, and where our this dbfile is going to be stored.
+        □ Along with this, it will run the migration created on the db and prompt the name for us to insert the update we
+        just did, for example, in a user creation we name the migration as 'criar tabela usuarios', for example, to store
+        this change.
+        
+      
+
   ● Centralize a single access point in the front-end
 
     ○ In the front-end, the instructor likes to create, in the front-end folder, a .env, insert a variable NEST_PUBLIC_API_URL
@@ -39,6 +47,8 @@
 
       □ Now on our context we can call
         `httpGet()
+
+  ● 
 
 
 
