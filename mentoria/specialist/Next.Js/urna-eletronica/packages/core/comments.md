@@ -24,4 +24,22 @@
         □ When we physically separate it, by creating a separate project, this does not happen
         □ Nwow, the same way we depend on core package, inside frontend, we'll depend on the authentication
 
+● Project Configuration
+
+  ○ Our frontend can easily access what was defined as a dependency of the packages (auth and core). But the backend, won't
+  be able to access them, it won't find the same classes.
+
+  ○ In the core package, on our application rules, because we are able to implement multiple solutions, without the need
+  of having a database, or framework. We can focus part of our programming effort into codes that are independent of
+  libraries/frameworks or databases.
+
+  ○ In the auth/usuario/service package folder, we implemented a `loginUsuario` feature that is using constant's user
+  that comes from the fixed array of the auth application
+
+  ○ This means that our use case depend on a certain way of the persistence mechanism, we may think that there is no persistence
+  mechanism, just a list of users, but there is a direct dependency from the login to the place where the data is stored.
+  And we can change and invert this logic 
+
+   
+
 
