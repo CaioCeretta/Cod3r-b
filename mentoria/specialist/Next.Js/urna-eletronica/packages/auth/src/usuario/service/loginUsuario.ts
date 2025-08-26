@@ -1,14 +1,16 @@
 import { usuariosFalsos as usuarios } from "../../constants/usuarios";
+import type RepositorioUsuario from "../interface/RepositorioUsuario";
 import type Usuario from "../model/Usuario";
 
 // This function returns never, instead of undefined because it may return an exception
-export default function loginUsuario(
-	email: string,
-	senha: string,
-): Usuario | never {
-	const usuario = usuarios.find(
-		(usuario) => usuario.email === email && usuario.senha === senha,
-	);
+export default async function loginUsuario(props: {
+	repo: RepositorioUsuario;
+	email: string;
+	senha: string;
+}): Promise<Usuario | never> {
+	const { repo, email, senha } = props;
+
+	const usuario = await repo.buscarPorEmail(email);
 
 	if (!usuario) {
 		throw new Error("User not found");

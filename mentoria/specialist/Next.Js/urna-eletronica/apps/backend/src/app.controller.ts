@@ -1,15 +1,25 @@
 import { Controller, Get } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: NestJS precisa da classe em runtime
-import { AppService } from "./app.service";
+import { loginUsuario, type Usuario } from "@urna/auth";
+import RepositorioUsuarioMemoria from "./RepositorioUsuarioMemoria";
 
 @Controller()
 export class AppController {
-	constructor(private readonly appService: AppService) {}
+	@Get("hello")
+	async getHello(): Promise<any> {
+		const usuario: Usuario = {
+			id: "1",
+			nome: "Fulano",
+			email: "fulano@ciclano.com",
+			senha: "123456",
+		};
 
-	@Get()
-	getHello(): { message: string } {
+		await loginUsuario({
+			email: usuario.email,
+			repo: new RepositorioUsuarioMemoria(),
+			senha: "123",
+		});
 		return {
-			message: this.appService.getHello(),
+			usuario,
 		};
 	}
 }

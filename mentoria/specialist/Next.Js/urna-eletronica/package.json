@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:frontend": "cd apps/frontend && npm run dev",
-    "dev:backend": "cd apps/backend && npm run start:dev"
+    "dev:backend": "cd apps/backend && npm run start:dev",
+    "dev:auth": "cd packages/auth && npm run dev",
+    "dev:core": "cd packages/core && npm run dev"
   },
   "workspaces": [
     "apps/*",

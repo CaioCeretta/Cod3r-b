@@ -1,3 +1,5 @@
+## Comments for the core and auth packages
+
 ● Authorization and Authentiication
 
   ○ Create a user folder and, within it, a `model` folder and a `service` folder
@@ -39,6 +41,67 @@
   ○ This means that our use case depend on a certain way of the persistence mechanism, we may think that there is no persistence
   mechanism, just a list of users, but there is a direct dependency from the login to the place where the data is stored.
   And we can change and invert this logic 
+
+● RepositorioUsuarios
+
+  ○ Still inside the auth package, within the users folder, and thinking on the ports/adapters pattern, the repository
+  will resemble a port, like it is an opportunity of personalizing something inside the business flow.
+    This folder can be, in a more explicit manner, our interfaces, or the folder name is also commonly named as `provider`
+  that is what we need to provide
+
+  ○ Inside this folder, we are going to create a RepositorioUsuario.ts file and export by default an interface called
+  `RepositorioUsuario` and saying the shape of the methods we want.
+
+  ○ This way, we have a "general repository" that inside our login flow, we will no longer depend on the usuarios array
+  that is stored in memory but expect to receive any implementation of that interface through our function properties.
+
+  ○ When the function starts to have multiple parameters, the instructor prefers to work with named parameters, even though
+  this is not a js functionality, across other languages it can be called positional parameters or named parameters. Where
+  we must pass the arguments in order of the defined parameters, where the params order make a difference, and named is
+  when we have key/value pairs.
+
+  ○ loginUsuarioparameters
+
+    1. In React components, it is common to pass a props object and destructure it directly in the function parameters: 
+
+    function MyComponent({ title, description} : { title: string; description: string }) {
+      return <h1>{title}</h1>
+    }
+
+    2. In regular functions, parameters are usually defined explicitly
+   
+      function loginUsuario(repo: UserRepository, email: string, password: string): User | nul{
+        ...
+      }
+
+    3. However, it is also possible to apply the same approach as in components: define a single props object and destructure
+    4. it inside the function body
+
+    loginUsuario(props: {
+      repo: RepositorioUsuario
+      email: string
+      senha: string
+    }): Usuario | never {
+      const {repo, email, senha}
+      // ...
+    }
+
+    ■ Traditionally, in regular functions, each parameter is defined explicitly. However, it is also possible to pass a
+    single props object and destructure its fields inside the function body. This pattern is more common in React Components,
+    but it works the same way in regular functions.
+
+  ○ Change from user array constant to the Repository
+
+    ■ This was a simple change, but it makes all the difference and points to this idea of having an architecture that is
+    independent of the database, and we are going to implement this interface pointing to the database, we won't have
+    trouble replacing a version that access in-memory data to a version that access data through the db. Only with this
+    simple change of receiving a repository through the user.
+
+
+
+    
+
+
 
    
 
