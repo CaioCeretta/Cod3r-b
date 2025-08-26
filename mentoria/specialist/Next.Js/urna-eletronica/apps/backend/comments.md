@@ -48,7 +48,42 @@
       □ Now on our context we can call
         `httpGet()
 
-  ● 
+  ● Backend Init
+
+    ○ In the backend, we are also going to import the authentication and the core package of our app, just like the in
+    front end
+    ○ Run npm install on the root folder of the node packages
+    ○ Add dev/backend script to package.json
+    ○ Create a backend/http/users.http to place the users rest test calls
+
+  ● HTTP Calls
+
+    ○ One thing we will notice is, if we try to insert an user through a simple route, such as the getHello, and return
+    the user to the client, it will work because http routes can access interfaces, but not functions, so if we try
+    to call a function from an http route, such as loginUsuario, passing a repository and the required parameters, it
+    won't work as expected 
+
+    ○ Nest.JS have some problems when dealing with ECMAScript's import  and export, so to fix this, we need to make some
+    changes to our packages to build them through a tool called tsup
+
+    ○ Changes to fix NestJS problems with imports and exports
+
+      ■ To do so, where we have the main attribute, inside the package.json, we change it to "dist/index.js", add the
+      tsup devDependency
+      ■ Create a types attribute with "dist/index.d.ts"
+      ■ Together with the dev script of "dist/
+      ■ Add these 3 scripts to the package.json
+        □"build": "tsup src/index.ts --dist --minify",
+        □"build:packages": "tsup src/index.ts --dts --minify",
+        □"dev": "tsup src/index.ts --dts --watch"
+      ■ Replicate these changes to the auth package
+      ■ Inside the root package.json, create scripts to run dev scripts from auth and core, which will run the tsc command
+      to the index.ts and update the dist/index.js
+
+
+
+
+
 
 
 
