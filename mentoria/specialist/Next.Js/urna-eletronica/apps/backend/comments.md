@@ -80,6 +80,128 @@
       ■ Inside the root package.json, create scripts to run dev scripts from auth and core, which will run the tsc command
       to the index.ts and update the dist/index.js
 
+  ● Integrate API with loginUser just created
+
+    ○ Beginning steps
+
+      1. Inside app controller, we return back to return a hello world message
+      2. Use nest cli in the terminal to create a new module for authentication
+        ■ nest g mo auth
+          □ nest generate module auth shorthand
+        ■ this creates a new module inside src and attach it to root app module
+      3. Also, create an auth controller
+        ■ move to the auth folder and run nest g co auth --flat --no-spec
+          □ With the --flat flag it won't create a subfolder but create it on the same folder as the module
+          □ --no-spec prevents the test files from being created
+        ■ Inside the controller, create an async login method, where it is going to be marked with the @Post('login')
+        annotation, as well as a register method
+    
+    ○ Create a solution to access prisma so we can access our model/database and the CRUD functions that prisma expose to
+    us through the database
+      ■ Generate a db module inside our app
+      ■ Modify the UsuariosRepositorio created in the root file, to a usuario-mem.repository.ts and create a sample user
+      object for testing
+    
+    ○ We are now going to have to create a valid implementation, with e-mail and password inside the repository
+      ■ Inside the login post method, we are going to receive the e-mail and password
+      ■ Call the loginUsuario function passing down these two parameters as argument
+      ■ When we have named arguments or an object passed as parameter, the advantage is that it becomes clear what each
+      argument represent
+      
+  ● Nest.JS requests
+
+    ○ Post request parameters
+
+      ■ async login(@Body() dados: { email: string; senha: string })
+        □ @Body() is the decorar that extracts the request body.
+        □ The parameter 'dados' will be exactly the object sent by the client in the body
+        □ By declaring `dados: { email: string, senha: string }, we are typing this object in TS to ensure it has exactly
+        these two string properties
+
+        □ So if the client makes a POST request with: 
+
+          ```ts
+          {
+            "email": "example@test.com",
+            "senha": "123456"
+          }
+          ```
+
+          ▢ `dados.email` will be 'example@test.com' and `dados.senha` will be '123456'
+
+           ■ Additional notes on the named params
+
+        ■ When writing loginUsuario(props: { repo: RepositorioUsuario; email: string; senha: string;}) it means that the
+        function isa receiving a single argument named props, and that this argument must be an object that contains exactly
+        those three parameters.
+
+        ■ Therefore, to calal the function we need to pass an object exactly with those keys.
+
+        ■ In summary we are saying
+          □ With props {...} -> we are telling that the argument is an object with these properties.
+
+
+        ■ Important notes
+
+          □ Nest.JS does not automatically validate types — for that, we need DTOs with class-validator and class-transformer
+          □ The type we declare in the parameter is only for TS and does not prevent the client from sending other types
+          or extra properties.
+
+        ■ For us to send the req body through the http file, it is going to look like
+
+          ```ts
+            POST http://url/folder/request
+              Content-Type: application/json
+
+              {
+                // body params
+              }
+          ```
+
+    ○ Token generation
+
+      ■ Install npm jsonwebtoken package to our app
+      ■ Within auth controller, import * as jwt from 'jsonwebtoken'
+      ■ create the token simply by token: 
+  ```ts
+          token: jwt.sign(usuario, 'chave', {
+				  expiresIn: '15d',
+			    })
+  ```
+      ■ Parameters breakdown
+
+        □ 1st Parameter: payload
+          . Payload is the content we are placing inside the token
+          . It can be an object, string or buffer
+          . In this case, the user object
+          . This means that, when someone tries to decodify this JWT, he will be able to see the user data (not encrypted,
+          just coded in base64)
+          . Payload example: 
+            {
+              "id": 1,
+              "nome": "Caio",
+              "email": "caio@email.com",
+              "iat": 1693075256,
+              "exp": 1694371256
+            }
+        □ 2nd Parameter: secretOrPrivateKey -> 'chave'
+          . Secret key used to sign the token
+          . This key ensures that the token isn't falsified
+          . Only one that knows this key in the server can verify if the token is valid
+          . Normally, this key doesn't stay hardcoded, but in an environment variable, such as
+            process.env.JWT_SECRET
+
+        □ 3rd Parameter: options
+          . Here we are passing extra options, such as expiresIn
+          . In the token payload, this shows as exp in UNIX timestamp
+
+
+     
+      
+
+
+
+
 
 
 
