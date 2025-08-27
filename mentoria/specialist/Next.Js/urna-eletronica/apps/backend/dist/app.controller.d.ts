@@ -1,3 +1,4 @@
 export declare class AppController {
-    getHello(): Promise<any>;
+    getHello(): any;
+    getReceitaFigado(): any;
 }

@@ -8,29 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const auth_1 = require("@urna/auth");
-const RepositorioUsuarioMemoria_1 = __importDefault(require("./RepositorioUsuarioMemoria"));
 let AppController = class AppController {
-    async getHello() {
-        const usuario = {
-            id: "1",
-            nome: "Fulano",
-            email: "fulano@ciclano.com",
-            senha: "123456",
-        };
-        await (0, auth_1.loginUsuario)({
-            email: usuario.email,
-            repo: new RepositorioUsuarioMemoria_1.default(),
-            senha: "123",
-        });
+    getHello() {
         return {
-            usuario,
+            mensagem: "Ciao, mondo",
+        };
+    }
+    getReceitaFigado() {
+        return {
+            ingredientes: `<ul>
+				<li> 1/2 Bife de figado </li>
+				<li> 1/2 colher de sopa de alho preparado </li>
+				<li> sal a gosto </li>
+				<li> 1 limão</li>
+				<li> 1/2 colher de oregano </li>
+				<li> 1/2 cebola </li>
+			</ul>`,
         };
     }
 };
@@ -39,8 +35,14 @@ __decorate([
     (0, common_1.Get)("hello"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", Object)
 ], AppController.prototype, "getHello", null);
+__decorate([
+    (0, common_1.Get)("receita-figado"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Object)
+], AppController.prototype, "getReceitaFigado", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)()
 ], AppController);

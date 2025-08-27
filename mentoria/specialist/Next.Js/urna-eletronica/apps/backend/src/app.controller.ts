@@ -1,25 +1,25 @@
 import { Controller, Get } from "@nestjs/common";
-import { loginUsuario, type Usuario } from "@urna/auth";
-import RepositorioUsuarioMemoria from "./RepositorioUsuarioMemoria";
 
 @Controller()
 export class AppController {
 	@Get("hello")
-	async getHello(): Promise<any> {
-		const usuario: Usuario = {
-			id: "1",
-			nome: "Fulano",
-			email: "fulano@ciclano.com",
-			senha: "123456",
-		};
-
-		await loginUsuario({
-			email: usuario.email,
-			repo: new RepositorioUsuarioMemoria(),
-			senha: "123",
-		});
+	getHello(): any {
 		return {
-			usuario,
+			mensagem: "Ciao, mondo",
+		};
+	}
+
+	@Get("receita-figado")
+	getReceitaFigado(): any {
+		return {
+			ingredientes: `<ul>
+				<li> 1/2 Bife de figado </li>
+				<li> 1/2 colher de sopa de alho preparado </li>
+				<li> sal a gosto </li>
+				<li> 1 limão</li>
+				<li> 1/2 colher de oregano </li>
+				<li> 1/2 cebola </li>
+			</ul>`,
 		};
 	}
 }
