@@ -295,5 +295,73 @@
     deletions, and creations ) inside the database of queries, and this could be used
 
     ■ Repository works very well when these queries are more basic, not advanced queries that work with multiple different
-    things.
+    things. 
+
+● Link backend with register
+
+  ○ Inside the register route, inside auth controller, call registrarUsuario
+  ○ Instead of using the same approach as loginUsuario, where we create a new repo of the desired implementation, when
+  calling, we now create a new repo class attribute, to share the same repo among the methods in this class
+  ○ Implement the 'ProvedorCriptografia', which it needs to encrypt the password
+    ■ To work with the dependency injection, we could say that the RepositorioUsuarioArray class is an injectable one
+    ■ Declare this class as a auth.module provider
+      □ Since it is a provider, it can be injected
+      □ If it can be injected inside our controller, we don't need to deal with the object lifecycle, meaning that we dont
+      need to instantiate, by ourselves, the object, as we are doing now. 
+      □ We simply tell Nest, inside the constructor, that we need a repository of that type and "ask" it to inject an
+      instance of it for us, and 
+
+    ■ Injection Problem i had
+
+      □ In AuthController, we did `constructor(private repo: RepositorioUsuarioArray) {} which means that i was expecting
+      Nest to automatically inject an instance of RepositorioUsuarioArray. However, for this to work, Nest needs to know
+      that:
+        1. This class is a valid provider (which we did by informing on the AuthModule it as a provider)
+        2. The controller also needs to be in the same module as the provider
+          . But in our AppMOdule, i have also included the AuthController manually. 
+          
+          This breaks the injection, since now the AuthController inside AppModule, doesn't detect the provider
+          `RepositorioUsuarioArray` inside AuthMOdule
+
+      □ To fix this, we had two options
+
+        . Option 1 (cleaner one) — Leave AuthController only inside AuthModule
+
+          ```ts
+            // app.module.ts
+              @Module({
+                imports: [AuthModule, DbModule],
+                controllers: [AppController], // ❌ removed o AuthController
+              })
+              export class AppModule {}
+          ```
+        
+        . Option 2 — Export the provider (if we wish to use it inside another module)
+
+        If we really need to use this repository outside AuthModule, we need to export it
+
+        ```ts
+          @Module({
+            providers: [RepositorioUsuarioArray],
+            controllers: [AuthController],
+            exports: [RepositorioUsuarioArray], // ✅ exporta
+          })
+          export class AuthModule {}
+        ```  
+
+        Now, AppModule, imports AuthModule via provider
+
+      □ And we also need to make sure that we import the repository entirely, if we only import ts types for typing, and not
+      the actual runtime value of the class or module, will cause errors
+
+        . NestJS relies on runtime values to perform dependency injection, so when we import only the type of a Repository
+        and use it on the injection, TS knows the type, but at runtime, NestJS does not see the class itself, so it cannot
+        instantiate it and inject it into the controller, causing the "Cannot resolve dependencies of Controller" 
+
+
+    
+
+
+
+
   
