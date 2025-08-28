@@ -1,4 +1,4 @@
-import type Usuario from "../model/Usuario";
+import type Usuario from '../model/Usuario';
 
 export default interface RepositorioUsuario {
 	// The return type is going to be a Promise since when dealing with databases we usually work with asynchronism
