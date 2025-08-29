@@ -113,7 +113,7 @@
     ○ Post request parameters
 
       ■ async login(@Body() dados: { email: string; senha: string })
-        □ @Body() is the decorar that extracts the request body.
+        □ @Body() is the decorator that extracts the request body.
         □ The parameter 'dados' will be exactly the object sent by the client in the body
         □ By declaring `dados: { email: string, senha: string }, we are typing this object in TS to ensure it has exactly
         these two string properties
@@ -157,6 +157,13 @@
                 // body params
               }
           ```
+    ○ Get Request Parameters
+
+      ■ With dynamic variables, such as @GET(':email'), when defining the function we must (@Param() email: string) {
+  
+      }
+      for example, and the email is going to come through the url such as localhost:4000/auth/email@email.com
+    
 
     ○ Token generation
 
@@ -310,6 +317,16 @@
       need to instantiate, by ourselves, the object, as we are doing now. 
       □ We simply tell Nest, inside the constructor, that we need a repository of that type and "ask" it to inject an
       instance of it for us, and 
+    ■ Create a bcrypt provider which, different from the other repository, implements ProvedorSenhaCriptografada
+    
+    ■ After implementing the register, we have to ensure that the login has to consider the password to be encrypted, so
+    we can't no longer do the simple password verification, if password of the user == password sent. Meaning that our
+    login function also needs to receive an implementation of `ProvedorSenhaCriptografa` in its parameters.
+      □ And now, on the comparison, we check if the password that come from the db, already encrypted, ist equal to the
+      one we are passing in, if not, throw an error
+
+
+
 
     ■ Injection Problem i had
 
@@ -329,7 +346,7 @@
 
           ```ts
             // app.module.ts
-              @Module({
+              hi@Module({
                 imports: [AuthModule, DbModule],
                 controllers: [AppController], // ❌ removed o AuthController
               })
@@ -357,6 +374,9 @@
         . NestJS relies on runtime values to perform dependency injection, so when we import only the type of a Repository
         and use it on the injection, TS knows the type, but at runtime, NestJS does not see the class itself, so it cannot
         instantiate it and inject it into the controller, causing the "Cannot resolve dependencies of Controller" 
+
+      □ However, when we don't need the class in real runtime, and we are not using it in the dependency injection, is
+      safe to import it as type — e.g. in class implementation
 
 
     
