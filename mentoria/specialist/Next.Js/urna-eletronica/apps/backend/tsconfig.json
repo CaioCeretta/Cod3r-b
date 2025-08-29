@@ -1,25 +1,36 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "resolvePackageJsonExports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
+    "target": "ES2023", // JS moderno
+    "module": "nodenext", // Node + ESM
+    "moduleResolution": "nodenext", // resolver módulos ESM
+    "esModuleInterop": true, // compatibilidade import/export
+    "allowSyntheticDefaultImports": true, // import default sem erro
+    "resolveJsonModule": true, // permitir import de JSON
+    "experimentalDecorators": true, // necessário para NestJS
+    "emitDecoratorMetadata": true, // necessário para NestJS
+    "isolatedModules": true, // compatível com Babel/ESM
+    "declaration": true, // gerar .d.ts
+    "sourceMap": true, // para debug
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
+    "skipLibCheck": true, // ignora checagem de libs de node_modules
+    "strict": true, // ativa todas as regras strict
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false, // você pode deixar true se quiser mais rigor
+    "strictNullChecks": true,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ] // garante que @types seja lido
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

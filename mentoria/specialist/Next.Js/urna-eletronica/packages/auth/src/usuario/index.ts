@@ -1,5 +1,8 @@
-import type Usuario from "./model/Usuario";
-import loginUsuario from "./service/loginUsuario";
+import  ProvedorSenhaCriptografada from './interface/ProvedorSenhaCriptografada';
+import RepositorioUsuario from './interface/RepositorioUsuario';
+import Usuario from './model/Usuario';
+import loginUsuario from './service/loginUsuario';
+import registrarUsuario from './service/registrarUsuario';
 
-export type { Usuario };
-export { loginUsuario };
+export type { Usuario, ProvedorSenhaCriptografada, RepositorioUsuario };
+export { loginUsuario, registrarUsuario };

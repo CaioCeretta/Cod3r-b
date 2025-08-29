@@ -1,15 +1,14 @@
+import { Injectable } from '@nestjs/common';
+import type RepositorioUsuario from '@urna/auth';
 import type { Usuario } from '@urna/auth';
-import type RepositorioUsuario from '@urna/auth/src/usuario/interface/RepositorioUsuario';
 
+@Injectable()
 export default class RepositorioUsuarioArray implements RepositorioUsuario {
-	private usuarios: Usuario[] = [
-		{
-			id: '1',
-			email: 'funcionaria@urna.com.br',
-			senha: '123456',
-			nome: 'Ariele',
-		},
-	];
+	private usuarios: Usuario[] = [];
+
+	async buscarPorId(id: number): Promise<Usuario | null> {
+		return this.usuarios.find((usuario) => usuario.id === id) || null;
+	}
 
 	async buscarPorEmail(email: string): Promise<Usuario | null> {
 		return this.usuarios.find((usuario) => usuario.email === email) || null;

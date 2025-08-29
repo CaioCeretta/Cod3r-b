@@ -1,14 +1,16 @@
 import { usuariosFalsos as usuarios } from '../../constants/usuarios';
+import type ProvedorSenhaCriptografada from '../interface/ProvedorSenhaCriptografada';
 import type RepositorioUsuario from '../interface/RepositorioUsuario';
 import type Usuario from '../model/Usuario';
 
 // This function returns never, instead of undefined because it may return an exception
 export default async function loginUsuario(props: {
 	repo: RepositorioUsuario;
+	cripto: ProvedorSenhaCriptografada;
 	email: string;
 	senha: string;
 }): Promise<Usuario | never> {
-	const { repo, email, senha } = props;
+	const { repo, cripto, email, senha } = props;
 
 	const usuario = await repo.buscarPorEmail(email);
 
@@ -16,8 +18,10 @@ export default async function loginUsuario(props: {
 		throw new Error('User not found');
 	}
 
+	const senhaCorreta = await cripto.comparar(senha, usuario.senha!);
+
 	// This is not a good practice, but just following the course.
-	if (usuario.senha !== senha) {
+	if (!senhaCorreta) {
 		throw new Error('Invalid Password');
 	}
 

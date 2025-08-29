@@ -1,14 +1,21 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { loginUsuario, type Usuario } from '@urna/auth';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { loginUsuario, registrarUsuario, type Usuario } from '@urna/auth';
 import * as jwt from 'jsonwebtoken';
-import RepositorioUsuarioArray from 'src/usuario-mem.repository';
+import RepositorioUsuarioArray from 'src/auth/usuario-mem.repository';
+import { BcryptProvider } from './bcrypt.provider';
 
 @Controller('auth')
 export class AuthController {
+	constructor(
+		private repo: RepositorioUsuarioArray,
+		private cripto: BcryptProvider,
+	) {}
+
 	@Post('login')
 	async login(@Body() usuarioInformado: Partial<Usuario>) {
 		const usuario = await loginUsuario({
-			repo: new RepositorioUsuarioArray(),
+			repo: this.repo,
+			cripto: this.cripto,
 			email: usuarioInformado.email,
 			senha: usuarioInformado.senha,
 		});
@@ -21,9 +28,17 @@ export class AuthController {
 	}
 
 	@Post('registrar')
-	async registrar() {
-		return {
-			mensagem: 'usuário registrado com sucesso',
-		};
+	async registrar(@Body() usuario: Partial<Usuario>) {
+		await registrarUsuario({
+			repo: this.repo,
+			cripto: this.cripto,
+			usuario,
+		});
+	}
+
+	@Get('usuario/:id')
+	async obterPorId(@Param() id: number) {
+		const usuario = await this.repo.buscarPorId(id);
+		return usuario;
 	}
 }

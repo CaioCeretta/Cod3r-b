@@ -14,35 +14,17 @@ const common_1 = require("@nestjs/common");
 let AppController = class AppController {
     getHello() {
         return {
-            mensagem: "Ciao, mondo",
-        };
-    }
-    getReceitaFigado() {
-        return {
-            ingredientes: `<ul>
-				<li> 1/2 Bife de figado </li>
-				<li> 1/2 colher de sopa de alho preparado </li>
-				<li> sal a gosto </li>
-				<li> 1 limão</li>
-				<li> 1/2 colher de oregano </li>
-				<li> 1/2 cebola </li>
-			</ul>`,
+            mensagem: 'Ciao, mondo',
         };
     }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, common_1.Get)("hello"),
+    (0, common_1.Get)('hello'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Object)
 ], AppController.prototype, "getHello", null);
-__decorate([
-    (0, common_1.Get)("receita-figado"),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
-], AppController.prototype, "getReceitaFigado", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)()
 ], AppController);

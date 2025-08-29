@@ -16,7 +16,7 @@ export default async function registrarUsuario(props: {
 	}
 
 	const usuarioExistente = await repo.buscarPorEmail(usuario.email!);
-	if (!usuarioExistente) throw new Error('User not found');
+	if (usuarioExistente) throw new Error('Usuário já existe');
 
 	const senhaCriptografada = await props.cripto.criptografar(usuario.senha!);
 
