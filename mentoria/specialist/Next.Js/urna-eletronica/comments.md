@@ -312,9 +312,76 @@
   ○ 4. Summary
 
     ■ import -> runtime + type (generates code)
-    ■ import type -> type-only (erased, no runtime code)
+    ■ import type - type-only (erased, no runtime code)
     ■ Choosing the wrong can either bloath the bundle (using import unnecessarily) or break runtime features (using import
     type when value is required, like NestJS DI)
+
+● Large Applications and Big Complexity Levels
+
+  ○ When developing an app, our architecture may increase its formality level, bringring more structure to it, and the
+  project may become more coupled, and with the team not knowing how to specify limits and it can be hard to work with
+  it.   
+
+  ○ However, when we bring a structure to the project, even though there are its negative sides, since it is not pleasurable
+  to create a protection layer between our business rule and the frameworks, and this means that there is a cost and effort
+  involved in this.
+    Instead of simply programming in only one file, we separate in four our more files so that we are able to create
+  this separation and then have its benefits. But here will be a question of sensibility to see if an already established
+  pattern can be applied into the project context, team context, which will may require adptat given patterns to the team
+  adhere the pattern and follow these rules in a way the whole team understand what is being done.
+    Sometimes we apply the codes in a very cartesian/mathematical manner but this may not be always the best choice for
+  the app or team.
+    The structure in this project is an intermediate structure, we didn't mix the codes, when thinking of the front-end
+  and the back-end, as well as the authentication and the business rules. Because the quantity of modules, and separations
+  that we will have and thinking on a strategic way. This whole thinking on require a maturity to us, to understand the
+  business without mixing contexts and treating everything as one thing.
+
+● Integrate our API with the use cases and the persistence 
+
+  ○ Up until now, we have already created a schema, with a User table, and one thing we can do when we divide our app into
+  multiple different modules, we can create one schema file for each module. So we can have an auth.prisma only for authentication
+  tables, and other one called core.prisma for tables related to our core, such as candidates, voters and the election, and
+  so on. Thefore, we can separate the business into smaller parts, including the main schema.
+
+  ○ One interesting thing to think of, when thinking on the data modelling and the app modelling, is that is possible that
+  in the modelling, we may not have the relation between two entities, but in the app model we have. It is not required
+  that the model (database modelling, and ER) that it is an actual mirror of our OOP modelling. When we mirror, it end up
+  being bad for the app, because sometimes we can take an existing project where the attribute names inside the objects is
+  the exact same name of the db columns.
+    ■ Meaning we can have attributes such as nm_user, just like we would have in the database, or txt_description, id_something.
+    Then there may have existed a pattern of how the db columns should be named and sometimes we want to mirror this into
+     ur OO world, and many times it should not be done, it should be both independent modellings, because even the relationships
+     are very different.
+    
+    ■ There is only one mechanism of relationship inside a database, all the rest is derived of the one to many relationship.
+      Every database is based on this relationship, because if we, for example, take a one to many relationship, we always
+      will have a primary key, that "leaves" to other table and becomes a foreign key, and this is the only relationship
+      we have inside a db. Now, what we do to simulate a one to one relation, we create a one to many relationship and add
+      to the foreign key column a unique constraint. Therefore, the mechanism is the same, primary key go into other table
+      as a foreign one. Lastly, the many to many relationship, is nothing more than two one to many relationships, where
+      we have an intermediate table simulating these n to n relationship
+
+    ■ When we think in an OO way, there indeed exist each one of these relationships, and even unidirectional, or bidirectional
+    relationships, where in the ER world, there will only exist unidirectional relationships. That's why the modelling is
+    supposed to be different and the way of thinking too. Is common for many people to start a system by the database, but
+    it end up not being a good alternative because our modelling start being oriented to what the database provides to us.
+    
+    ■ If it is a database based in documents, we are going to think that way, if its an ER database, we think of that other
+    way, and it ends up coupling the app and we start thinking very data oriented and not business oriented. Since the business
+    have flows, processes, behaviors that modify an object state, and so on. Therefore, is import to have this separation
+    and that's why ORM databases exist.
+
+
+    
+
+
+  
+
+  
+  
+  
+
+
 
 
 
