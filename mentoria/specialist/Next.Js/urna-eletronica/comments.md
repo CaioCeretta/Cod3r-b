@@ -338,38 +338,44 @@
 
 ● Integrate our API with the use cases and the persistence 
 
-  ○ Up until now, we have already created a schema, with a User table, and one thing we can do when we divide our app into
-  multiple different modules, we can create one schema file for each module. So we can have an auth.prisma only for authentication
-  tables, and other one called core.prisma for tables related to our core, such as candidates, voters and the election, and
-  so on. Thefore, we can separate the business into smaller parts, including the main schema.
+  ○ Up until now, we have already created a schema, with a User table. One thing we can do when dividing our app into
+  multiple modules is to create one schema file per module. For example, we can have an `auth.prisma` file only for authentication
+  related tables, and other one called `core.prisma` for core tables related to our core entities such as candidates, voters
+  and the election. This way, we separate the business domain into smaller parts, including the main schema.
 
-  ○ One interesting thing to think of, when thinking on the data modelling and the app modelling, is that is possible that
-  in the modelling, we may not have the relation between two entities, but in the app model we have. It is not required
-  that the model (database modelling, and ER) that it is an actual mirror of our OOP modelling. When we mirror, it end up
-  being bad for the app, because sometimes we can take an existing project where the attribute names inside the objects is
-  the exact same name of the db columns.
-    ■ Meaning we can have attributes such as nm_user, just like we would have in the database, or txt_description, id_something.
-    Then there may have existed a pattern of how the db columns should be named and sometimes we want to mirror this into
-     ur OO world, and many times it should not be done, it should be both independent modellings, because even the relationships
-     are very different.
-    
-    ■ There is only one mechanism of relationship inside a database, all the rest is derived of the one to many relationship.
-      Every database is based on this relationship, because if we, for example, take a one to many relationship, we always
-      will have a primary key, that "leaves" to other table and becomes a foreign key, and this is the only relationship
-      we have inside a db. Now, what we do to simulate a one to one relation, we create a one to many relationship and add
-      to the foreign key column a unique constraint. Therefore, the mechanism is the same, primary key go into other table
-      as a foreign one. Lastly, the many to many relationship, is nothing more than two one to many relationships, where
-      we have an intermediate table simulating these n to n relationship
+  ○ An interesting point, when thinking about data modeling and app modeling, is that sometimes two entities may not have
+  may not have direct relationship, but they do in the app model. It is not required that the database schema (ER model)
+  be a mirror of our object-oriented model. In fact, for instance, in some projects the attribute names inside objects are
+  copied directly from the database column names, the exact same name of the db column names, such as `nm_user`, `txt_description`
+  or id_something. These naming conventions may have sense for database design, but they should not necessarily be carried
+  over to te object-oriented domain. Database modeling and application modeling should be independent, since even the way
+  relationships are expressed differs significantly.
 
-    ■ When we think in an OO way, there indeed exist each one of these relationships, and even unidirectional, or bidirectional
-    relationships, where in the ER world, there will only exist unidirectional relationships. That's why the modelling is
-    supposed to be different and the way of thinking too. Is common for many people to start a system by the database, but
-    it end up not being a good alternative because our modelling start being oriented to what the database provides to us.
+  ○ In a database, there is essentially one mechanism of relationship: one-to-many. Every other type of relationship derives
+  from it. For example:
     
-    ■ If it is a database based in documents, we are going to think that way, if its an ER database, we think of that other
-    way, and it ends up coupling the app and we start thinking very data oriented and not business oriented. Since the business
-    have flows, processes, behaviors that modify an object state, and so on. Therefore, is import to have this separation
-    and that's why ORM databases exist.
+    ■ To simulate a one-to-one relationship, we creae a one-to-many and then add a `UNIQUE` constraint to the foreign key
+    column.
+
+    ■ A many-to-many relationship is nothing more than two one-to-many relationships with an intermediate table linking
+    them. Therefore, at the database level, the mechanism is always the same: a primary key from one table becomes a foreign
+    key in another.
+  
+  ○ In contrast, in object-oriented design we explicitly model different types of relationship including unidirectional
+  and bidirectional associations. In ER modeling, however, all relationships are inherently unidirectional. That's why
+  database modeling and application modeling should be treated different
+
+  ○ It is common for teams to start system design from the database, but this is often not the best approach. If we model
+  based on the database first, our thinking becomes too data-oriented and constrained by the database technology. For example
+    
+    ■ If it is a document-based database, we think in terms of documents.
+    
+    ■ If it is a relational ER database, we think in terms of relations. In both cases, the application becomes coupled to
+    the database.
+
+  ○ Instead, we should think in a business-oriented way, focusing on flows, processes, and behaviors that modify the state
+  of objects. That's why it is important to maintain separation between database modeling and application modeling—and this
+  is also why ORMs exist.
 
 
     
