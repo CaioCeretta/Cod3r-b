@@ -374,8 +374,7 @@
     the database.
 
   ○ Instead, we should think in a business-oriented way, focusing on flows, processes, and behaviors that modify the state
-  of objects. That's why it is important to maintain separation between database modeling and application modeling—and this
-  is also why ORMs exist.
+  of objects. That's why it is important to maintain separation between database modeling and application modeling—and this is also why ORMs exist.
 
 
     
