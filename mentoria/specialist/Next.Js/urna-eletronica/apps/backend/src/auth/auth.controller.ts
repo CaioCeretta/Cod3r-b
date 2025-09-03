@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { loginUsuario, registrarUsuario, type Usuario } from '@urna/auth';
 import * as jwt from 'jsonwebtoken';
-import RepositorioUsuarioArray from 'src/auth/usuario-mem.repository';
 import { BcryptProvider } from './bcrypt.provider';
+import { UsuarioPrisma } from './usuario.prisma';
 
 @Controller('auth')
 export class AuthController {
 	constructor(
-		private repo: RepositorioUsuarioArray,
+		private repo: UsuarioPrisma,
 		private cripto: BcryptProvider,
 	) {}
 
