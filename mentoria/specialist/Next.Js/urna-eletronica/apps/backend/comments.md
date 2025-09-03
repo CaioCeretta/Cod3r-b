@@ -431,6 +431,93 @@
         . This means that each element will be separated, and there is going to exist one flow, flow communications, to
         communicate among all these modules.
 
+  ○ Now that we have our PrismaProvider, we need to make it very clear, inside the module, that we want to export it to
+  the outside. So any one that wants to use the DbModule will have the possibility of using the PrismaProvider, for example,
+  the AuthModule will want to access the db module.
+
+    ■ For this, inside auth.module imports attribute, we need to specify the DbModule
+    ■ And since the DbModule, exports the provider, the auth module will be able to access the Prisma Provider
+    ■ Go inside the auth folder and creating a prisma.user as a UserRepository, since we are accessing Prisma
+    ■ The reason for us to name the file in association to the technology, is because the file is completely related and
+    tied to that technology. Because in the application, one time or another we are going to need codes that are specific
+    to each one. If we are going to use another technology, such as a fire store, we create a separate file to it, and so
+    on
+  
+  ○ usuario.prisma controller
+    ■ Inside auth folder, via nest cli, generate a provider named `usuario.prisma`, and this will create inside of the
+    auth module, a controller named usuario.prisma
+
+    ■ One time it has created the provider and exported the DbModule, in the auth module's user.prisma, we can define a
+    constructor and inject this UsuarioPrisma as parameter, e.g. `constructor(private readonly prisma: PrismaProvider) {}`
+
+    ■ Usuario prisma must implement the `RepositorioUsuario` we have defined when creating our in-memory tests and override
+    those required methods
+
+    ■ Prisma upsert works like this
+      ```ts
+        prisma.usuario.upsert({
+          where: {id: ...}, // Needs to be a unique value
+          update: {...}, // if finds, update
+          create: {...} // if doesn't find, create it
+        })
+      ```
+
+      □ About id: usuario.id 
+
+        - The where field, must be a valid unique value (in this case, id)
+        - If we want to pass undefined or null inside where, Prisma will throw an error, because he is not able to build
+        the query
+
+      □ Why usuario.id ?? -1 was used?
+
+        - This ?? -1 is a "trick" for when the user.id is undefined (when the user is new)
+        - If id doesn't exist -> it forces -1. Since there is no user with that id, Prisma falls in `create`
+        - If id exist -> he tries to update it, if i doesn't find, create
+
+      □ So, is it necessary? 
+
+      . Depends: 
+
+          - If we guarantee user.id will always be present (e.g., for new users we handle it earlier, and for existing user
+          it's always provided) -> we can use id: usuario.id directly.
+          - If id might be missing -> we need some fallback, either ?? -1 or an explicit if
+
+      . Many developers prefer not to use ?? -1 since it's a bit "magical" anmd can be confusing. Instead, they write it
+      explictly
+
+        ```ts
+          if(usuario.id) {
+            await this.prisma.usuario.upsert({
+              where: { id: usuario.id },
+              update: usuario,
+              create: usuario,
+            });
+          } else {
+            await this.prisma.usuario.create({data: usuario})
+          }
+        ```
+      
+        - Which makes the intentior clearer
+         
+  ○ Now, with the prisma.user provider created, we are going to be able to see a big advantage of clean architecture
+
+    ■ The biggest advantage of having a clean architectures, is because in our tests, when we are going to test the use
+    cases or entities test, and so on. We simply don't depend on any database and we can pass a repository which saves
+    in an array (in-memory). 
+
+    ○ And since now we have the usuario.prisma repository which extends from the db module, the auth controller repo will
+    be of that new repository type
+
+          
+
+
+  
+
+
+
+
+  
+
 
 
 
