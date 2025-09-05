@@ -378,6 +378,120 @@
   
   ○ Continue in the apps/backend db module
 
+● DTS flag in tsup
+
+  ○ In tsup (the ts bundler), the flag --dts or the option dts:true in tsup.config.ts is used to generate type declaration
+  fyles (.d.ts) along with the bundle
+
+  ○ This is important when we are creating a library or package that will be used by other ts projects because:
+    ■ The transpiled JavaScript does not contain information of types
+    ■ The .d.ts files describe the types of each function, class, constant, etc.\
+
+  ○ Practical example
+
+    ■ If we have
+      ```
+        export function sum(a: number, b: number) {
+          return a + b;
+        }
+      ```
+
+      □ When running tsup with dts: true, besides generating dist/math.js, it generates
+
+        ```ts
+          export declare function sum(a: number, b: number): number;
+        ```
+      
+        Which means that dts is just the types outputs of the bundle
+
+  ○ Why did i need to go inside the given package and run a build, to generate the dist folder, when both execute tsup
+  `src/index.ts, --dts`?
+
+    ■ The main difference between build and dev is that build uses the --minify flag and dev uses --watch flag, but
+    why does it matter when creating the dist folder? 
+
+      □ What does --minify do? 
+
+        . Under the hood, it uses esbuild to compress the output
+        . Reduce internal variable names (When possible)
+        . Removes commentaries
+        . Does some code simplifying
+
+        . Quick Example
+
+          ```
+            export function sum(a: number, b: number) {
+              return a + b;
+            }
+          ```
+
+          - Without minifying
+
+            ```
+              "use strict";
+              Object.defineProperty(exports, "__esModule", { value: true });
+              exports.soma = soma;
+              function soma(a, b) {
+                return a + b;
+              }
+
+          - With --minify
+
+          ```
+          "use strict";Object.defineProperty(exports,"__esModule",{value:!0});function o(r,e){return r+e}exports.soma=o;
+          ```  
+
+      ■ Therefore, it does not change anything in the behavior, it is useful for production since the package becomes smaller
+      and in dev, we normally avoid minifying, since it difficults the debug and there won't be a real performance benefit
+      during development
+
+      ■ With this being said, --minify has nothing to do with the dist creation. What changes is how --watch works
+
+        □ 1. tsup --watch
+          . It does not run a full initial build by default.
+          . It only enters on the mode "watching updates"
+          . If here is nothing already compiled in `dist`, we will get an empty folder
+        
+        □ 2. minify
+          . runs a full build, generating .js + .d.ts, and only then, finishes
+          . since it does not have a --watch, we will always leave with a empty dist
+
+        □ 3. What happens with dev in our case
+
+          . We were running `tsup src/index.ts --dts --watch`.
+          . tsup directly enters in watch mode, but no creating an initial dist
+          . When next.js tried to import @urna/shared, there was no `dist/index.js` yet, so we got the Cannot find module
+          ... dist/index.js error.
+
+        □ Standard Fix in Monorepos
+
+          . Option 1 - run build first, then watch with npm run build && npm run dev
+          . Option 2 - add --clean flag so tsup ensures an initial build
+          . Option 3 - use a tsup.config.ts file configure it to always tart with a clean + initial build
+
+            ```
+              import { defineConfig } from 'tsup'
+
+              export default defineConfig({
+                entry: ['src/index.ts'],
+                dts: true,
+                clean: true,
+                watch: process.env.NODE_ENV === 'development',
+              })
+            ```
+
+
+
+
+   
+
+
+
+
+
+    
+
+
 
 
 
