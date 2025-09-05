@@ -1,7 +1,6 @@
 {
-  "name": "@urna/core",
+  "name": "@urna/shared",
   "version": "1.0.0",
-  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,12 +9,9 @@
     "dev": "tsup src/index.ts --dts --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Caio Ceretta Soares",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "@urna/shared": "*"
-  },
+  "description": "",
   "devDependencies": {
     "tsup": "^8.5.0"
   }

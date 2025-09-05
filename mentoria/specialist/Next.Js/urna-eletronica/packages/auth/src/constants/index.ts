@@ -1,3 +1,3 @@
-import { usuariosFalsos as usuarios } from "./usuarios";
+import { usuarios } from './usuarios';
 
 export default usuarios;

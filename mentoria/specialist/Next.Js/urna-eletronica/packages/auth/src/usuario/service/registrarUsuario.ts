@@ -1,4 +1,4 @@
-import { usuariosFalsos as usuarios } from '../../constants/usuarios';
+import { ErroValidacao } from '@urna/shared';
 import type ProvedorSenhaCriptografada from '../interface/ProvedorSenhaCriptografada';
 import type RepositorioUsuario from '../interface/RepositorioUsuario';
 import type Usuario from '../model/Usuario';
@@ -12,7 +12,7 @@ export default async function registrarUsuario(props: {
 	const { repo, usuario } = props;
 
 	if (!usuario) {
-		throw new Error('Informacoes nao enviadas');
+		throw new ErroValidacao('Informacoes nao enviadas');
 	}
 
 	const usuarioExistente = await repo.buscarPorEmail(usuario.email!);

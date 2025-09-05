@@ -1,4 +1,3 @@
-import { usuariosFalsos as usuarios } from '../../constants/usuarios';
 import type ProvedorSenhaCriptografada from '../interface/ProvedorSenhaCriptografada';
 import type RepositorioUsuario from '../interface/RepositorioUsuario';
 import type Usuario from '../model/Usuario';
