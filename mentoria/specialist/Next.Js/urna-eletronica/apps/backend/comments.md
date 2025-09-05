@@ -505,8 +505,94 @@
     cases or entities test, and so on. We simply don't depend on any database and we can pass a repository which saves
     in an array (in-memory). 
 
-    ○ And since now we have the usuario.prisma repository which extends from the db module, the auth controller repo will
+    ■ And since now we have the usuario.prisma repository which extends from the db module, the auth controller repo will
     be of that new repository type
+
+    ■ With these changes being made, from in memory to the database repo, next time the API is executed, it will save on
+    the DB with no necessity of updating our use cases, flows or modeling.  
+
+
+  ○ Custom Error
+
+    ■ Here we will create a error filter. For this, in our terminal, we will go to the root of the project and create a
+    new `filter` with `nest g f error --flat --no-spec`
+
+    ■ A nest.js generated filter consist of catch method, that receives the expection as a T generic typing and a hostt
+    parameter of type ArgumentHost
+
+    ■ Now, we need to declare this filter in a way that it can be part of our application, like a middleware, where it
+    will intermediate every request before our controllers.
+      □ For this, on main.ts, before bootstraping (launching) the application, invoke an app.useGlobalFilters()
+      with a `new ErrorFilter()` as argument
+
+    ■ Inside our error filter, within @Catch() annotation, we are going to choose a class for it to intercept, an Error
+    class is a very generic option, but it will make every Error to be intercepted and pass through this class.
+
+    ■ Now, after the changes, getting the current context of the host, getting the response an typing it as a generic
+    `Express Response`, if our http call errors, the answer we sent via response will be logged on the response.
+
+    ■ Meaning that now the answer is being controlled by us and is not simply an internal error, and now we can patternize
+    what kind of answer we want in our api error treatment, because this response will be fundamental for us to know
+    how these answers are going to be treated in the front-end
+
+    ■ First, we are going to get the expection status, we will follow these steps
+      1. Change expection parameter type to any
+      2. After our exception, try to grab the status by assigning exception.status to a status const, if we don't have any,
+      return 500
+      3. If the status is different, we will now know if is an error caused by the server or 400 that was caused by the
+      client
+      4. Now, we can increment the error object returned to the user with the status, response, date and the error
+      message
+
+    ■ Create a new shared package, and inside of it, create a ValidationError class, this new package will be a dependency
+    of all the apps inside our mono repo, the ErroValidacao wll simply receive, in its constructor, a message: string and
+    a readonly status defaulted as 400, in the constructor body, call the Error constructor super() with the message.
+
+    ■ Now, in our use case, such as the service/RegistrarUsuario, instead of throwing a new Error, we can throw a new
+    ErroValidacao, since it extends from Error and return the way we want.
+
+
+  ○ 
+
+  ○ Difference between || (Logic OR) and ?? (nullish coalescing)
+
+    ■ Both of them look alike, however, the criteria used to choose the value is different
+
+      □ ||
+        . It returns the first "truthy" value and in js, the values considered falsy are
+          - false
+          - "" (empty string)\
+          - null
+          - undefined
+          - NaN
+
+      □ ??
+
+        . It only ignores the value if it is null or undefined, and do not consider 0 nor "" as falsy
+
+        . Example
+          
+          const a = 0 ?? 42 <- a will be equal to 0, since 0 is not null nor undefined
+          const b = "" ?? "hello" <- b will be equal to "" since its not null nor undefined
+          const c = null ?? "ok" <- c will be equal to "ok", since null is nullish
+          const d = undefined ?? "ok" <- "ok" 
+         
+
+         
+
+
+  ○ Lack of export/import problem
+
+    ■ One thing to notice is, when we created the new prisma provider, changed the auth controller, and so on, it could raise
+    some issues to be aware of: 
+
+      □  If the code stop running, something may have been missing: 
+        - If we don't export the prisma provider from the db module, since it is needed to the app to work
+        - If we don't import the dbmodule inside the auth module
+  
+  
+
+
 
           
 
