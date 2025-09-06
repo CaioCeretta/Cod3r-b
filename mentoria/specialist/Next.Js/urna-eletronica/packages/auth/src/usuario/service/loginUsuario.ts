@@ -1,3 +1,4 @@
+import { ErroValidacao } from '@urna/shared';
 import type ProvedorSenhaCriptografada from '../interface/ProvedorSenhaCriptografada';
 import type RepositorioUsuario from '../interface/RepositorioUsuario';
 import type Usuario from '../model/Usuario';
@@ -14,14 +15,14 @@ export default async function loginUsuario(props: {
 	const usuario = await repo.buscarPorEmail(email);
 
 	if (!usuario) {
-		throw new Error('User not found');
+		throw new ErroValidacao('User not found');
 	}
 
 	const senhaCorreta = await cripto.comparar(senha, usuario.senha!);
 
 	// This is not a good practice, but just following the course.
 	if (!senhaCorreta) {
-		throw new Error('Invalid Password');
+		throw new ErroValidacao('Invalid Password');
 	}
 
 	/* Important to ensure that we are not sending the password, even if its encrypted, since it's a big security mistake
