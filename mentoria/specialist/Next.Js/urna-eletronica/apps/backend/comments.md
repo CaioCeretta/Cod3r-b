@@ -544,15 +544,16 @@
       4. Now, we can increment the error object returned to the user with the status, response, date and the error
       message
 
-    ■ Create a new shared package, and inside of it, create a ValidationError class, this new package will be a dependency
+    ■ Create a new shared package, and inside of it, create a `ErroValidacao` class, this new package will be a dependency
     of all the apps inside our mono repo, the ErroValidacao wll simply receive, in its constructor, a message: string and
     a readonly status defaulted as 400, in the constructor body, call the Error constructor super() with the message.
 
     ■ Now, in our use case, such as the service/RegistrarUsuario, instead of throwing a new Error, we can throw a new
     ErroValidacao, since it extends from Error and return the way we want.
 
+    ■ After creating the shared package and the `ValidacaoErro` class, instead of just throwing a random error, we can now
+    throw a new `ValidacaoErro` and it will return to us the client error in the way we expect
 
-  ○ 
 
   ○ Difference between || (Logic OR) and ?? (nullish coalescing)
 

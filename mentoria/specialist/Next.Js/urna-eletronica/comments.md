@@ -466,8 +466,9 @@
         □ Standard Fix in Monorepos
 
           . Option 1 - run build first, then watch with npm run build && npm run dev
-          . Option 2 - add --clean flag so tsup ensures an initial build
-          . Option 3 - use a tsup.config.ts file configure it to always tart with a clean + initial build
+          . Option 2 - insert the new dev:shared script to root package.json, so it ensures its build
+          . Option 3 - add --clean flag so tsup ensures an initial build
+          . Option 4 - use a tsup.config.ts file configure it to always tart with a clean + initial build
 
             ```
               import { defineConfig } from 'tsup'
