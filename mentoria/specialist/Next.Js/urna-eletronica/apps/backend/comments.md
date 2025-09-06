@@ -557,6 +557,7 @@
     ■ We can also think that on our business, we are mixing http codes with our modeling. The answer is yes, in this case
     we are bringing technology to our app, however, this doesn't generate any impact, but this is not an external dependency,
     or something irreplaceable, and it is not being "spread" all over the app, is simply something chose to easy the erroring.
+      
 
 
   ○ Difference between || (Logic OR) and ?? (nullish coalescing)
