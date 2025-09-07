@@ -6,7 +6,7 @@
     "dev:frontend": "cd apps/frontend && npm run dev",
     "dev:backend": "cd apps/backend && npm run start:dev",
     "dev:auth": "cd packages/auth && npm run dev",
-    "dev:core": "cd packages/core && npm run dev",
+    "dev:votacao": "cd packages/votacao && npm run dev",
     "dev:shared": "cd packages/shared && npm run dev"
   },
   "workspaces": [
