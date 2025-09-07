@@ -481,6 +481,54 @@
               })
             ```
 
+● Hexagonal Architecture
+
+  ○ Hexagonal architecture (Also called Ports and Adapters) was proposed by Alistair Cockburn. The main idea is to separate
+  the application core (business rule) from the ways outside world interacts with it
+
+    ■ Core (App Domain) -> Our pure business rules, independent of frameworks, databases, external API, etc.
+    ■ Ports -> Interfaces that define how som,ething external can interact with the core.
+      □ Example: A user repository can be defined as an interface `UserRepository` without worriying if the data is coming
+      from a SQL, NoSQL or API
+    ■ Adapters -> Concrete implementations of these ports.
+      □ Example: UserRepositoryPostgres or UseRepoositoryInMemory
+
+  ○ Simple analogy
+
+    ■ Imagine our house (the application core)
+    ■ We have different doors: the front door, the back door, the garage
+    ■ Each door is a contract (interface) that defines how something can get in or out
+    ■ What goes through the door can vary
+      . A person through the front door
+      . A car through the garage
+    
+    In an application: 
+      . A port (interface) defines the contract (what is allowed to pass).
+      . An adapter is what implements that contract (a person, a car, a database, an API)
+
+
+● `Candidato` Register and Votacao module
+
+  ○ A Candidate is part of the core
+
+    ■ When we want to register the candidate to the db, even though we are separating the code in parts, a candidate is
+    part of our core, and maybe using the name core to it is bad, since core is a generic name and it could be better
+    if we created a voting module to it. It would be more interesting, because it has the candidate, the voting, the election
+    and so on. So because of it, we are changing the core package folder to `votacao`, and change its package.json as
+    @urna/votacao
+
+    ■ Everywhere we have the @urna/core dependency we are going to change to @urna/votacao, as well as on the root dev:core
+    that enters the core folder
+    
+    ■ Inside src, create a new `Candidato` which will be similar to auth's user, it will have the model/Candidato.ts file
+    and the RepositorioCandidato within the candidato/interface folder
+
+  ○ Within hexagonal architecture, an intrerface is a "port" and a "port" is an entry point that allows us to us to plug
+   something into the core of our application
+
+  
+    
+
 
 
 
