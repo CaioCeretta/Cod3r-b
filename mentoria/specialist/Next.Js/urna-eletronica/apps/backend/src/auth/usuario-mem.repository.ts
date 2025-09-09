@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import type RepositorioUsuario from '@urna/auth';
 import type { Usuario } from '@urna/auth';
+import { RepositorioUsuario } from '@urna/auth';
 
 @Injectable()
 export default class RepositorioUsuarioArray implements RepositorioUsuario {

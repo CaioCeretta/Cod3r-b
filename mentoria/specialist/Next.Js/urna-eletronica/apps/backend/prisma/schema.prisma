@@ -11,11 +11,20 @@ datasource db {
 }
 
 model Usuario {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   nome  String
-  email String  @unique
+  email String @unique
   senha String
-  ativo Boolean @default(true)
 
   @@map("usuarios")
+}
+
+model Candidato {
+  id        Int    @id @default(autoincrement())
+  numero    Int    @unique
+  nome      String
+  partido   String
+  imagemUrl String
+
+  @@map("candidatos")
 }

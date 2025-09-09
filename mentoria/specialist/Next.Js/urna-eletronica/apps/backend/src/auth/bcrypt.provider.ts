@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type ProvedorSenhaCriptografada from '@urna/auth';
+import type { ProvedorSenhaCriptografada } from '@urna/auth';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

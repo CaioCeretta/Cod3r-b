@@ -97,6 +97,40 @@
     trouble replacing a version that access in-memory data to a version that access data through the db. Only with this
     simple change of receiving a repository through the user.
 
+● `Candidato` Register and Votacao module
+
+  ○ A Candidate is part of the core
+
+    ■ When we want to register the candidate to the db, even though we are separating the code in parts, a candidate is
+    part of our core, and maybe using the name core to it is bad, since core is a generic name and it could be better
+    if we created a voting module to it. It would be more interesting, because it has the candidate, the voting, the election
+    and so on. So because of it, we are changing the core package folder to `votacao`, and change its package.json as
+    @urna/votacao
+
+    ■ Everywhere we have the @urna/core dependency we are going to change to @urna/votacao, as well as on the root dev:core
+    that enters the core folder
+    
+    ■ Inside src, create a new `Candidato` which will be similar to auth's user, it will have the model/Candidato.ts file
+    and the RepositorioCandidato within the candidato/interface folder
+
+  ○ Within hexagonal architecture, an intrerface is a "port" and a "port" is an entry point that allows us to us to plug
+   something into the core of our application
+
+  ○ Candidate
+
+    ■ One thing good of prisma, is that it is very "external", our models don't have to know which is the persistence
+    mechanism and have to use all the annotations inside of it, which is cleaner
+
+    ■ It is not role of the use case, to implement validations inside an use case. We can call the validations inside them,
+    we invoke a validation that was created outside, be it through from a validator, an utilitary class, or even through
+    the object, but use case should not worry about implementing these validations.
+      . The use case is an "orchestrator", it manages the flow interacting with these interfaces being passed through
+      our project
+
+    ■ After creating the repo, model and service, on our backend we need to generate the module candidato. Comments will
+    continue on the backend
+    
+
 
 
     

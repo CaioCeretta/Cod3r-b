@@ -16,9 +16,7 @@ export class UsuarioPrisma implements RepositorioUsuario {
 
 	buscarPorId(id: number): Promise<Usuario | null> {
 		return this.prisma.usuario.findUnique({
-			where: {
-				id,
-			},
+			where: { id },
 		});
 	}
 

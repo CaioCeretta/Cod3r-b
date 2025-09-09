@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { loginUsuario, registrarUsuario, type Usuario } from '@urna/auth';
+import { loginUsuario, registrarUsuario, Usuario } from '@urna/auth';
 import * as jwt from 'jsonwebtoken';
 import { BcryptProvider } from './bcrypt.provider';
 import { UsuarioPrisma } from './usuario.prisma';
@@ -13,6 +13,10 @@ export class AuthController {
 
 	@Post('login')
 	async login(@Body() usuarioInformado: Partial<Usuario>) {
+		// loginUsuario requires an email and password, so to avoid squiggly lines, add this checking
+		if (!usuarioInformado.email || !usuarioInformado.senha) {
+			throw new Error('Email e senha são obrigatórios');
+		}
 		const usuario = await loginUsuario({
 			repo: this.repo,
 			cripto: this.cripto,
