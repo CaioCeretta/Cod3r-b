@@ -625,6 +625,15 @@
     ■ 2. Using with Nest DI (Dependency Injection)
 
       If we want Nest to automatically create an instance and inject it within other providers, we need `@Injectable()`
+
+      ```ts
+        @Injectable()
+        export class PrismaProvider extends PrismaClient {}
+      ```
+
+        . With no Injectable() nest will not recognize this class as a provider and won't be able to inject it inside
+        `CandidatoPrisma`
+        . With Injectable(), Nest knows it can instantiate and manage the lifecycle of the object
   
   
 
