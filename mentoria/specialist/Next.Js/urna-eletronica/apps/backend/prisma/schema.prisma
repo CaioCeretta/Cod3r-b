@@ -23,6 +23,7 @@ model Candidato {
   id        Int    @id @default(autoincrement())
   numero    Int    @unique
   nome      String
+  descricao String
   partido   String
   imagemUrl String
 
