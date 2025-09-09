@@ -506,27 +506,57 @@
       . A port (interface) defines the contract (what is allowed to pass).
       . An adapter is what implements that contract (a person, a car, a database, an API)
 
+    A simple example would be to follow this architecture
 
-● `Candidato` Register and Votacao module
+      candidato/
+      ├─ model/           -> Entities or domain interfaces
+      │   └─ Candidato.ts
+      │
+      ├─ service/         -> Business Rules (use cases, application services)
+      │   └─ CandidatoService.ts
+      │
+      ├─ repository/      -> Port (repository interface)
+      │   └─ RepositorioCandidato.ts
+      │
+      └─ provider/        -> Concrete adapters (interface implementations)
+          ├─ PrismaRepositorioCandidato.ts
+          └─ MemoryRepositorioCandidato.ts
 
-  ○ A Candidate is part of the core
+● Errors
 
-    ■ When we want to register the candidate to the db, even though we are separating the code in parts, a candidate is
-    part of our core, and maybe using the name core to it is bad, since core is a generic name and it could be better
-    if we created a voting module to it. It would be more interesting, because it has the candidate, the voting, the election
-    and so on. So because of it, we are changing the core package folder to `votacao`, and change its package.json as
-    @urna/votacao
+  ○ Infrastructure errors are are bigger problem that error messages, even though if we would, by mistake, generate a flaw
+  on auth where we say what part of the login is wrong, if we exposed the orm, or which db we are using, it can also cause
+  a possible exploit of the problems of these mechamisms, e.g. prisma error,  mysql error
+  ○ Because sometimes it is best for us to be clear with the user, rather than worrying about security.
 
-    ■ Everywhere we have the @urna/core dependency we are going to change to @urna/votacao, as well as on the root dev:core
-    that enters the core folder
-    
-    ■ Inside src, create a new `Candidato` which will be similar to auth's user, it will have the model/Candidato.ts file
-    and the RepositorioCandidato within the candidato/interface folder
+● Export and Export Type
 
-  ○ Within hexagonal architecture, an intrerface is a "port" and a "port" is an entry point that allows us to us to plug
-   something into the core of our application
+  ○ In our code, we made something as:
 
+    ```ts
+      export type { Candidato, RepositorioCandidato }
+      export { CadastrarUsuario}
+    ```
+
+    Which means that: 
+
+    export type {...} -> Only exports ts types (interfaces, types, etc). This does not generate no code in the final JS,
+    it only exist in compilation time for type validation
+
+    export { ... } -> Exports real values (functions, classes, constants, etc.), which will indeed be available in
+    runtime
   
+  ○ Why RepositorioCandidato was exported as a type? 
+
+    ■ RepositorioCandidato is an interface, which is only a type, in JS it will not turn out to be a JS code after
+    transpiling. Which means that there isn't a variable or object called RepositorioCandidato in runtime
+
+    ■ While CadastrarUsuario:
+
+      It is a real function, it exist both in runtime as in compilation time (with types) while in execution time (generated
+      JS code). That's why we export it without the type keyword
+
+
     
 
 

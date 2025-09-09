@@ -509,7 +509,26 @@
     be of that new repository type
 
     ■ With these changes being made, from in memory to the database repo, next time the API is executed, it will save on
-    the DB with no necessity of updating our use cases, flows or modeling.  
+    the DB with no necessity of updating our use cases, flows or modeling.
+
+  ○ Candidato Module
+
+    ■ We generate candidato with the `nest g mo candidato` command, and with this, it will generate a new candidato folder
+    inside our src, with the candidato module
+
+    ■ We now move to the candidato folder and generate the controller with `nest g co candidato --flat --no-spec`
+      □ even though we are not specifying in its name that it is a controller, a candidato.controller.ts file will be
+      generated, and the class name will be CandidatoController
+
+    ■ also generate a provider, which will be our `nest g pr candidato.prisma --flat --no-spec`
+
+      □ Inside CandidatoPrisma, within the constructor, inject the private PrismaProvider
+
+    ■ Now, our candidatoModule will also import the DbModule since it exports the PrismaProvider
+
+    
+
+● Overall problemss
 
 
   ○ Custom Error
@@ -582,9 +601,6 @@
           const b = "" ?? "hello" <- b will be equal to "" since its not null nor undefined
           const c = null ?? "ok" <- c will be equal to "ok", since null is nullish
           const d = undefined ?? "ok" <- "ok" 
-         
-
-         
 
 
   ○ Lack of export/import problem
@@ -595,6 +611,20 @@
       □  If the code stop running, something may have been missing: 
         - If we don't export the prisma provider from the db module, since it is needed to the app to work
         - If we don't import the dbmodule inside the auth module
+  
+  ○ Nest @Injectable() annotation
+
+    ■ 1. Exporting the class
+
+      ```ts
+        export class PrismaProvider extends PrismaClient {}
+      ```
+
+      □ We can export it normally and import inside other files. This works with any class in TS
+
+    ■ 2. Using with Nest DI (Dependency Injection)
+
+      If we want Nest to automatically create an instance and inject it within other providers, we need `@Injectable()`
   
   
 
