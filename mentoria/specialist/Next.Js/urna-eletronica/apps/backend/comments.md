@@ -528,7 +528,7 @@
 
     
 
-● Overall problemss
+● Overall Jest comments
 
 
   ○ Custom Error
@@ -634,6 +634,19 @@
         . With no Injectable() nest will not recognize this class as a provider and won't be able to inject it inside
         `CandidatoPrisma`
         . With Injectable(), Nest knows it can instantiate and manage the lifecycle of the object
+
+  ○ Named API calls and constants
+
+    ■ With named calls, we are able to retrieve this api call and assign its return in a variable, and since our login
+    method returns an object with the token attribute, we can access it through callname.response.body.token
+
+    ■ We will notice that, before executing the login, this constant variable `@token = {{login.response.body.token}}`
+    will have a squiggly line before the login executes, this happens because @token still does not exist, since the login
+    call has'nt  been made yet. As soon as the call is made, this warning disappears
+
+  ○ One thing we need to be sure of, when executing prisma calls, we need to make sure that our type model is the same as
+  the prisma model schema, otherwise, it will "red" the whole file since the types are different
+
   
   
 
