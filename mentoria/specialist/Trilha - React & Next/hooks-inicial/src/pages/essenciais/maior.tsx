@@ -22,6 +22,12 @@ export default function () {
     console.log(`N1: ${n1}, N2: ${n2}, maior: ${maior}`)
   }, [n1, n2, maior])
 
+  useEffect(() => {
+    if (maior > 5) {
+      window.alert("Os numéros estão ficando altos!")
+    }
+  }, [maior])
+
   return (
     <Pagina>
       <Display texto={`N1: ${n1} | N2: ${n2}`} textoComplementar={`O maior número é ${maior}`} />

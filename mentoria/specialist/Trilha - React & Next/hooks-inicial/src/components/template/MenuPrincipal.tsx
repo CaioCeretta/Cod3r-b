@@ -1,4 +1,4 @@
-import { IconArrowsLeftRight, IconNumbers, IconUsers, IconMenu, IconMathGreater, IconX } from "@tabler/icons";
+import { IconArrowsLeftRight, IconNumbers, IconUsers, IconMenu, IconMathGreater, IconLetterCase } from "@tabler/icons";
 import { MenuItem } from "../../data/models/MenuItem";
 import { MenuSecao } from "../../data/models/MenuSecao";
 import Logo from "./Logo";
@@ -12,13 +12,14 @@ export default function MenuPrincipal() {
             titulo: "Essenciais",
             aberta: true,
             itens: [
-                {titulo: "Contador", url: "/essenciais/contador", tag: "useState", icone: <IconNumbers />},
-                {titulo:"Votação", url:"/essenciais/votacao", tag:"useState", icone:<IconUsers/>},
-                {titulo: "Consulta API", url: "/essenciais/consultaAPI", tag: "useEffect", icone: <IconArrowsLeftRight />},
-                {titulo: "Maior", url: "/essenciais/maior", tag: "useEffect", icone: <IconMathGreater />}
+                { titulo: "Contador", url: "/essenciais/contador", tag: "useState", icone: <IconNumbers /> },
+                { titulo: "Votação", url: "/essenciais/votacao", tag: "useState", icone: <IconUsers /> },
+                { titulo: "Consulta API", url: "/essenciais/consultaAPI", tag: "useEffect", icone: <IconArrowsLeftRight /> },
+                { titulo: "Maior", url: "/essenciais/maior", tag: "useEffect", icone: <IconMathGreater /> },
+                { titulo: "Contagem Caracteres", url: "/essenciais/contagemCaracteresEffect", tag: "useEffect", icone: <IconLetterCase /> }
             ],
         },
-        
+
     ];
     const mini = false;
     function renderizarSecoes() {
